@@ -4,13 +4,16 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import androidx.annotation.Nullable;
+
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Database extends SQLiteOpenHelper {
 
     private Context context;
-    private String DB_NAME;
-    private int DB_VER;
+    protected String DB_NAME;
+    protected int DB_VER;
 
     private String TABLE;
 
@@ -21,20 +24,43 @@ public class Database extends SQLiteOpenHelper {
         this.context = context;
         this. DB_NAME = DB_NAME;
         this.DB_VER = DB_VER;
+        this.TABLE = TABLE;
         this.columns = columns;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        
+        try{
+            sqLiteDatabase.execSQL("create table " + TABLE + " (" + formatColumnNamesWithDataTypes() + ");");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        try{
+            sqLiteDatabase.execSQL("drop table if exists " + TABLE);
+            onCreate(sqLiteDatabase);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    private void formatColumnNamesWithDataTypes(){
-
+    private @Nullable String formatColumnNamesWithDataTypes(){
+        try{
+            StringBuilder columnNamesWithDataTypes = new StringBuilder();
+            for(Map.Entry<String, String> column: columns.entrySet()){
+                columnNamesWithDataTypes.append(column.getKey()).append(" ").append(column.getValue()).append(",");
+            }
+            String value = columnNamesWithDataTypes.toString();
+            if(value.endsWith(",")){
+                value = value.substring(0, value.length() - 1);
+            }
+            return value;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -19,6 +19,8 @@ public class Database extends SQLiteOpenHelper {
 
     private LinkedHashMap<String, String> columns;
 
+    protected SQLiteDatabase database;
+
     Database(Context context, String DB_NAME, int DB_VER, String TABLE, LinkedHashMap<String, String> columns){
         super(context, DB_NAME, null, DB_VER);
         this.context = context;

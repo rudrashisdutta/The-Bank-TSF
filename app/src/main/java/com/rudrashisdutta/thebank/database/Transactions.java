@@ -1,7 +1,10 @@
 package com.rudrashisdutta.thebank.database;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.banking.Transaction;
 
 import java.util.ArrayList;
@@ -9,6 +12,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Transactions extends Database{
+
+    private Context context;
+
     private static String DB_NAME = "BANKING";
     private static int DB_VER = 1;
 
@@ -24,25 +30,8 @@ public class Transactions extends Database{
     };
     private List<String> columnNames;
 
-    private static LinkedHashMap<Long, Transaction> transactions;
-
-    private static void getUpdates(){
-        try{
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public static List<Transaction> getCustomers() {
-        getUpdates();
-        return (new ArrayList<>(transactions.values()));
-    }
-
-    public static Transaction get(long transactionID){
-        getUpdates();
-        return null;
-    }
+    private static LinkedHashMap<String, Transaction> transactions;
+    private static String ORDER;
 
     Transactions(Context context) {
         this(context, DB_NAME);
@@ -59,7 +48,28 @@ public class Transactions extends Database{
     Transactions(Context context, String DB_NAME, int DB_VER, String TABLE, LinkedHashMap<String, String> columns) {
         super(context, DB_NAME, DB_VER, TABLE, columns);
         columnNames = new ArrayList<>(columns.keySet());
+        this.context = context;
     }
 
+    private static void getUpdates(Context context){
+        SQLiteDatabase database = new Customers(context).getReadableDatabase();
+        transactions.clear();
+        transactions = new LinkedHashMap<>();
+        try(Cursor cursor = database.rawQuery("select * from " + TABLE + " ORDER BY " + ORDER + "", null)){
+            while(cursor.moveToNext()){
+                transactions.put(cursor.getString(0), Transaction.build(cursor.getString(0), cursor.getLong(1), cursor.getLong(2), cursor.getLong(3), cursor.getDouble(4)));
+            }
+        }
+    }
+
+    public static List<Transaction> getCustomers(Context context) {
+        getUpdates(context);
+        return (new ArrayList<>(transactions.values()));
+    }
+
+    public static Transaction get(Context context, String transactionID){
+        getUpdates(context);
+        return transactions.get(transactionID);
+    }
 
 }

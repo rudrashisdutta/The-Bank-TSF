@@ -1,5 +1,7 @@
 package com.rudrashisdutta.thebank.banking;
 
+import android.content.Context;
+
 import com.rudrashisdutta.thebank.database.Customers;
 
 public class Customer {
@@ -102,7 +104,7 @@ public class Customer {
         return customer;
     }
 
-    public static Customer get(long customerID){
-        return null;
+    public static Customer get(Context context, long customerID){
+        return Customers.get(context, customerID);
     }
 }

@@ -1,10 +1,12 @@
 package com.rudrashisdutta.thebank.banking;
 
+import android.content.Context;
+
 import com.rudrashisdutta.thebank.database.Transactions;
 
 public class Transaction {
 
-    private long transactionID = -1;
+    private String transactionID = null;
     private long customerID = -1;
     private long receiverID = -1;
     private long transactionTime = -1;
@@ -12,11 +14,11 @@ public class Transaction {
 
     private Transactions transactions;
 
-    public long getTransactionID() {
+    public String getTransactionID() {
         return transactionID;
     }
 
-    private void setTransactionID(long transactionID) {
+    private void setTransactionID(String transactionID) {
         this.transactionID = transactionID;
     }
 
@@ -52,7 +54,7 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public static Transaction create(long transactionID, long customerID, long receiverID, long transactionTime, double amount){
+    public static Transaction build(String transactionID, long customerID, long receiverID, long transactionTime, double amount){
         Transaction transaction = new Transaction();
         transaction.setTransactionID(transactionID);
         transaction.setCustomerID(customerID);
@@ -62,7 +64,7 @@ public class Transaction {
         return transaction;
     }
 
-    public static Transaction get(long transactionID){
-        return null;
+    public static Transaction get(Context context, String transactionID){
+        return Transactions.get(context, transactionID);
     }
 }

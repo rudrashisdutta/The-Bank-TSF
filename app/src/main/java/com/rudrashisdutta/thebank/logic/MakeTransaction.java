@@ -4,7 +4,10 @@ import android.content.Context;
 
 import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.banking.Transaction;
+import com.rudrashisdutta.thebank.database.Customers;
 import com.rudrashisdutta.thebank.database.Transactions;
+
+import java.util.Date;
 
 public class MakeTransaction {
 
@@ -24,10 +27,34 @@ public class MakeTransaction {
     private Transaction getTransaction() {
         return transaction;
     }
+    private boolean updateBalance(long customerID){
+        boolean success = false;
+        try {
+            Customers customers = new Customers(context);
+            Customer customer = Customers.get(context, customerID);
+            double newBalance = customer.getBalance() - getTransaction().getAmount();
+            customers.updateBalance(Customers.get(context, getTransaction().getCustomerID()), newBalance);
+            success = true;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return success;
+    }
 
     public Transaction make(){
-        Transactions transactions = new Transactions(context);
-        return transactions.store(getTransaction()) ? getTransaction() : null;
+        try {
+            Transactions transactions = new Transactions(context);
+            Date dateTimeNow = new Date();
+            Transaction.build(transaction, dateTimeNow.getTime());
+            boolean transactionSuccessful = transactions.store(getTransaction());
+            if(transactionSuccessful){
+                updateBalance(getTransaction().getCustomerID());
+                updateBalance(getTransaction().getReceiverID());
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return getTransaction();
     }
 
     private void setTransaction(Transaction transaction) {
@@ -41,6 +68,11 @@ public class MakeTransaction {
         makeTransaction.setTransaction(transaction);
         makeTransaction.context = context;
         return makeTransaction;
+    }
+    public static boolean checkIfPossible(Customer sender, double amount){
+        boolean possible;
+        possible = !(amount > sender.getBalance());
+        return possible;
     }
 
 }

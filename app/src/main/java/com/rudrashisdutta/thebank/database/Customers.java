@@ -40,7 +40,7 @@ public class Customers extends Database{
     private static String ORDER;
 
 
-    Customers(Context context) {
+    public Customers(Context context) {
         this(context, DB_NAME);
     }
     Customers(Context context, String DB_NAME) {

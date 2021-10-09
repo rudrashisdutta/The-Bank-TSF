@@ -63,6 +63,10 @@ public class Transaction {
         transaction.setAmount(amount);
         return transaction;
     }
+    public static Transaction build(Transaction transaction, long transactionTime){
+        transaction.setTransactionTime(transactionTime);
+        return transaction;
+    }
 
     public static Transaction get(Context context, String transactionID){
         return Transactions.get(context, transactionID);

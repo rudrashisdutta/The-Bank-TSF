@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.banking.Transaction;
 
@@ -28,12 +31,12 @@ public class Transactions extends Database{
             put("amount", "REAL");
         }
     };
-    private List<String> columnNames;
+    private static List<String> columnNames = new ArrayList<>(columns.keySet());
 
     private static LinkedHashMap<String, Transaction> transactions;
     private static String ORDER;
 
-    Transactions(Context context) {
+    public Transactions(Context context) {
         this(context, DB_NAME);
     }
     Transactions(Context context, String DB_NAME) {
@@ -47,9 +50,50 @@ public class Transactions extends Database{
     }
     Transactions(Context context, String DB_NAME, int DB_VER, String TABLE, LinkedHashMap<String, String> columns) {
         super(context, DB_NAME, DB_VER, TABLE, columns);
-        columnNames = new ArrayList<>(columns.keySet());
+//        columnNames = new ArrayList<>(columns.keySet());
         this.context = context;
     }
+
+    public boolean store(Transaction transaction){
+        boolean success = false;
+        try {
+            database = getWritableDatabase();
+            database.execSQL("insert into " + TABLE + " (" + formatColumnNamesAsString() + ") values(" + formatCustomerAsString(transaction) + ");");
+            success = true;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return success;
+    }
+    private static @Nullable
+    String formatColumnNamesAsString(){
+        try {
+            StringBuilder columnNamesInFormat = new StringBuilder();
+            for(String columnName : columnNames){
+                columnNamesInFormat.append(columnName).append(", ");
+            }
+            String value = columnNamesInFormat.toString();
+            if(value.endsWith(", ")){
+                value = value.substring(0, value.length() - 2);
+            }
+            return value;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    private static @NonNull
+    String formatCustomerAsString(Transaction transaction){
+        StringBuilder transactionAsString;
+        transactionAsString = new StringBuilder();
+        transactionAsString.append("'").append(transaction.getTransactionID()).append("',");
+        transactionAsString.append(transaction.getCustomerID()).append(",");
+        transactionAsString.append(transaction.getReceiverID()).append(",");
+        transactionAsString.append(transaction.getTransactionTime()).append(",");
+        transactionAsString.append(transaction.getAmount());
+        return transactionAsString.toString();
+    }
+
 
     private static void getUpdates(Context context){
         SQLiteDatabase database = new Customers(context).getReadableDatabase();

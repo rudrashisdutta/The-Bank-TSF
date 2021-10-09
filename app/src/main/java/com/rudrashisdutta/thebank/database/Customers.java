@@ -69,6 +69,17 @@ public class Customers extends Database{
         }
         return success;
     }
+    public Customer updateBalance(Customer customer, double newBalance){
+        try{
+            database = getWritableDatabase();
+            database.execSQL("update " + TABLE + " set " + columnNames.get(columnNames.size() - 2) + " = " + newBalance + " where " + columnNames.get(0) + " = " + customer.getCustomerID() + ";");
+            Customer.build(customer, newBalance);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return customer;
+    }
+
     private static @Nullable String formatColumnNamesAsString(){
         try {
             StringBuilder columnNamesInFormat = new StringBuilder();

@@ -103,6 +103,10 @@ public class Customer {
         customer.setAddress(address);
         return customer;
     }
+    public static Customer build(Customer customer, double newBalance){
+        customer.setBalance(newBalance);
+        return customer;
+    }
 
     public static Customer get(Context context, long customerID){
         return Customers.get(context, customerID);

@@ -18,10 +18,10 @@ public class Transactions extends Database{
 
     private Context context;
 
-    private static String DB_NAME = "BANKING";
-    private static int DB_VER = 1;
+    private static final String DB_NAME = "BANKING";
+    private static final int DB_VER = 1;
 
-    private static String TABLE = "TRANSACTIONS";
+    private static final String TABLE = "TRANSACTIONS";
     private static LinkedHashMap<String, String> columns = new LinkedHashMap<String, String>(){
         {
             put("_transaction_id", "text primary key");
@@ -93,16 +93,24 @@ public class Transactions extends Database{
         transactionAsString.append(transaction.getAmount());
         return transactionAsString.toString();
     }
+    private static void updateOrder(Context context){
+        ORDER = new Application(context).getTransactionsOrder();
+    }
 
 
     private static void getUpdates(Context context){
-        SQLiteDatabase database = new Customers(context).getReadableDatabase();
-        transactions.clear();
-        transactions = new LinkedHashMap<>();
-        try(Cursor cursor = database.rawQuery("select * from " + TABLE + " ORDER BY " + ORDER + "", null)){
-            while(cursor.moveToNext()){
-                transactions.put(cursor.getString(0), Transaction.build(cursor.getString(0), cursor.getLong(1), cursor.getLong(2), cursor.getLong(3), cursor.getDouble(4)));
+        try {
+            updateOrder(context);
+            SQLiteDatabase database = new Customers(context).getReadableDatabase();
+            transactions.clear();
+            transactions = new LinkedHashMap<>();
+            try(Cursor cursor = database.rawQuery("select * from " + TABLE + " ORDER BY " + ORDER + "", null)){
+                while(cursor.moveToNext()){
+                    transactions.put(cursor.getString(0), Transaction.build(cursor.getString(0), cursor.getLong(1), cursor.getLong(2), cursor.getLong(3), cursor.getDouble(4)));
+                }
             }
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -114,6 +122,26 @@ public class Transactions extends Database{
     public static Transaction get(Context context, String transactionID){
         getUpdates(context);
         return transactions.get(transactionID);
+    }
+
+    public static void empty(Context context){
+        try {
+            SQLiteDatabase database = new Customers(context).getWritableDatabase();
+            database.execSQL("delete from " + TABLE);
+            getUpdates(context);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static long count(Context context){
+        long count;
+        SQLiteDatabase database = new Transactions(context).getReadableDatabase();
+        try(Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null)){
+            cursor.moveToFirst();
+            count = cursor.getInt(0);
+        }
+        return count;
     }
 
 }

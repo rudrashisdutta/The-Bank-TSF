@@ -110,15 +110,24 @@ public class Customers extends Database{
         customerAsString.append(customer.getAddress()).append("'");
         return customerAsString.toString();
     }
+    private static void updateOrder(Context context){
+        ORDER = new Application(context).getCustomerOrder();
+    }
+
 
     private static void getUpdates(Context context){
-        SQLiteDatabase database = new Customers(context).getReadableDatabase();
-        customers.clear();
-        customers = new LinkedHashMap<>();
-        try(Cursor cursor = database.rawQuery("select * from " + TABLE + " ORDER BY " + ORDER + "", null)){
-            while(cursor.moveToNext()){
-                customers.put(cursor.getLong(0), Customer.build(cursor.getLong(0), cursor.getString(1), cursor.getLong(2), cursor.getString(3), cursor.getLong(4), cursor.getString(5), cursor.getString(6), cursor.getDouble(7), cursor.getString(8)));
+        try {
+            updateOrder(context);
+            SQLiteDatabase database = new Customers(context).getReadableDatabase();
+            customers.clear();
+            customers = new LinkedHashMap<>();
+            try(Cursor cursor = database.rawQuery("select * from " + TABLE + " ORDER BY " + ORDER + "", null)){
+                while(cursor.moveToNext()){
+                    customers.put(cursor.getLong(0), Customer.build(cursor.getLong(0), cursor.getString(1), cursor.getLong(2), cursor.getString(3), cursor.getLong(4), cursor.getString(5), cursor.getString(6), cursor.getDouble(7), cursor.getString(8)));
+                }
             }
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -131,4 +140,24 @@ public class Customers extends Database{
         getUpdates(context);
         return customers.get(customerID);
     }
+
+    public static void empty(Context context){
+        try {
+            SQLiteDatabase database = new Customers(context).getWritableDatabase();
+            database.execSQL("delete from " + TABLE);
+            getUpdates(context);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static long count(Context context){
+        long count;
+        SQLiteDatabase database = new Customers(context).getReadableDatabase();
+        try(Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null)){
+            cursor.moveToFirst();
+            count = cursor.getInt(0);
+        }
+        return count;
+    }
+
 }

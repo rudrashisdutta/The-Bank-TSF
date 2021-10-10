@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.rudrashisdutta.thebank.database.Customers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Customer {
 
     private long customerID = -1;
@@ -17,6 +20,15 @@ public class Customer {
     private String address = null;
 
     private Customers customers;
+
+    private static final List<Customer> defaultCustomers = new ArrayList<Customer>(){
+        {
+//            add(Customer.build());
+        }
+    };
+    public static List<Customer> getDefaultCustomers() {
+        return defaultCustomers;
+    }
 
     public long getCustomerID() {
         return customerID;

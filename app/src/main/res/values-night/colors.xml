@@ -11,4 +11,7 @@
     <!--    Customised Colors-->
     <color name="base_theme_1">@color/UI_normal</color>
     <color name="base_theme_2">@color/UI_dark</color>
+
+    <color name="negative_1">@color/black</color>
+    <color name="negative_2">@color/white</color>
 </resources>

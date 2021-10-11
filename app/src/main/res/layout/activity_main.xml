@@ -4,4 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity"/>
+    tools:context=".ui.MainActivity"
+    android:animateLayoutChanges="true">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/bg_supportactionbar"
+        app:subtitleTextColor="@color/base_theme_2"
+        android:paddingHorizontal="15dp">
+
+        <TextView
+            android:id="@+id/toolBarActivityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/base_theme_2"
+            android:textSize="14sp"
+            android:alpha="0.8"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/bg_tabs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_tabs"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:tabIndicatorColor="@color/base_theme_2"
+            app:tabRippleColor="@color/base_theme_2"
+            app:tabTextColor="@color/base_theme_2"
+            app:tabSelectedTextColor="@color/negative_1"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/mainScreen"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/appBar"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar"
+        tools:layout_editor_absoluteX="15dp"
+        android:animateLayoutChanges="true"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,6 @@ package com.rudrashisdutta.thebank.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,9 +39,6 @@ public class Application extends Database{
     }
     Application(Context context, String DB_NAME, int DB_VER, String TABLE, LinkedHashMap<String, String> columns) {
         super(context, DB_NAME, DB_VER, TABLE, columns);
-        if(!createDataIfNotFound(context)){
-            Log.e("APPLICATION DATA", "DATA NOT FOUND! DATA HAS BEEN UPDATED!");
-        }
     }
 
     public void updateCustomersOrder(boolean ascending){
@@ -88,11 +84,23 @@ public class Application extends Database{
     public static boolean createDataIfNotFound(Context context){
         boolean found = false;
         try{
-            if(count(context) == 0){
+            long count = 0;
+             try{
+                 count = count(context);
+             } catch (Exception e){
+                 e.printStackTrace();
+             }
+            if(count == 0){
                 initialize(context);
                 found = true;
             }
-            if(Customers.count(context) != 10){
+            count = 0;
+            try{
+                count = Customers.count(context);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+            if(count != 10){
                 initializeCustomers(context);
             }
         } catch (Exception e){
@@ -101,29 +109,36 @@ public class Application extends Database{
         return found;
     }
     private static long count(Context context){
-        long count;
-        SQLiteDatabase database = new Application(context).getReadableDatabase();
-        try(Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null)){
+        long count = 0;
+        try {
+            Application application = new Application(context);
+            application.getWritableDatabase();
+            SQLiteDatabase database = application.getReadableDatabase();
+            Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null);
             cursor.moveToFirst();
             count = cursor.getInt(0);
+        } catch (Exception e){
+            e.printStackTrace();
         }
         return count;
     }
-    private static void initialize(Context context){
-        SQLiteDatabase database = new Application(context).getWritableDatabase();
+    public static void initialize(Context context){
         try {
+            SQLiteDatabase database = new Application(context).getWritableDatabase();
             database.execSQL("insert into " + TABLE + " (" + formatColumnNamesAsString() + ") values(" + formatCustomerAsString(ASCENDING, ASCENDING) + ");");
-            initializeCustomers(context);
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    private static void initializeCustomers(Context context){
-        Customers.empty(context);
-        Customers customers = new Customers(context);
-        for(Customer customer : Customer.getDefaultCustomers()){
-            customers.store(customer);
+    public static void initializeCustomers(Context context){
+        try {
+            Customers customers = new Customers(context);
+            for(Customer customer : Customer.getDefaultCustomers()){
+                customers.store(customer);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 

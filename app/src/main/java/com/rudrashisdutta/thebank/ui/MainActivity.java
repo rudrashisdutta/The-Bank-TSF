@@ -3,7 +3,6 @@ package com.rudrashisdutta.thebank.ui;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
@@ -11,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.rudrashisdutta.thebank.R;
+import com.rudrashisdutta.thebank.database.Application;
 import com.rudrashisdutta.thebank.databinding.ActivityMainBinding;
 import com.rudrashisdutta.thebank.logic.ViewPagerAdapter;
 
@@ -43,17 +43,16 @@ public class MainActivity extends AppCompatActivity {
         mainScreen = mainActivity.mainScreen;
         mainScreenAdapter = new ViewPagerAdapter(this, activityNameOnSupportActionBar);
         mainScreen.setAdapter(mainScreenAdapter);
-        new TabLayoutMediator(tabs, mainScreen, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                if(position == 0){
-                    tab.setIcon(R.drawable.ic_customers);
-                    tab.setText("CUSTOMERS");
-                } else{
-                    tab.setIcon(R.drawable.ic_transactions);
-                    tab.setText("TRANSACTIONS");
-                }
+        new TabLayoutMediator(tabs, mainScreen, (tab, position) -> {
+            if(position == 0){
+                tab.setIcon(R.drawable.ic_customers);
+                tab.setText("CUSTOMERS");
+            } else{
+                tab.setIcon(R.drawable.ic_transactions);
+                tab.setText("TRANSACTIONS");
             }
         }).attach();
+
+        new Thread(() -> Application.createDataIfNotFound(MainActivity.this)).start();
     }
 }

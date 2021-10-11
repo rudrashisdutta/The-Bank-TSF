@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.banking.Transaction;
 
 import java.util.ArrayList;

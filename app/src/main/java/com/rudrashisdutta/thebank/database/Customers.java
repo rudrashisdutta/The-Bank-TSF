@@ -25,9 +25,9 @@ public class Customers extends Database{
         {
             put("_customer_id", "INTEGER primary key");
             put("customer_name", "text");
-            put("DOB", "INTEGER");
+            put("DOB", "text");
             put("email", "text");
-            put("mobile", "INTEGER");
+            put("mobile", "text");
             put("PAN", "text");
             put("aadhaar", "text");
             put("balance", "REAL");
@@ -100,10 +100,10 @@ public class Customers extends Database{
         StringBuilder customerAsString;
         customerAsString = new StringBuilder();
         customerAsString.append(customer.getCustomerID()).append(",'");
-        customerAsString.append(customer.getCustomerName()).append("',");
-        customerAsString.append(customer.getDOB()).append(",'");
-        customerAsString.append(customer.getEmail()).append("',");
-        customerAsString.append(customer.getMobileNumber()).append(",'");
+        customerAsString.append(customer.getCustomerName()).append("','");
+        customerAsString.append(customer.getDOB()).append("','");
+        customerAsString.append(customer.getEmail()).append("','");
+        customerAsString.append(customer.getMobileNumber()).append("','");
         customerAsString.append(customer.getPAN()).append("','");
         customerAsString.append(customer.getAadhaar()).append("',");
         customerAsString.append(customer.getBalance()).append(",'");
@@ -123,7 +123,7 @@ public class Customers extends Database{
             customers = new LinkedHashMap<>();
             try(Cursor cursor = database.rawQuery("select * from " + TABLE + " ORDER BY " + ORDER + "", null)){
                 while(cursor.moveToNext()){
-                    customers.put(cursor.getLong(0), Customer.build(cursor.getLong(0), cursor.getString(1), cursor.getLong(2), cursor.getString(3), cursor.getLong(4), cursor.getString(5), cursor.getString(6), cursor.getDouble(7), cursor.getString(8)));
+                    customers.put(cursor.getLong(0), Customer.build(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getDouble(7), cursor.getString(8)));
                 }
             }
         } catch (Exception e){
@@ -151,11 +151,16 @@ public class Customers extends Database{
         }
     }
     public static long count(Context context){
-        long count;
-        SQLiteDatabase database = new Customers(context).getReadableDatabase();
-        try(Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null)){
+        long count = 0;
+        try {
+            Customers customers = new Customers(context);
+            customers.getWritableDatabase();
+            SQLiteDatabase database = customers.getReadableDatabase();
+            Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null);
             cursor.moveToFirst();
             count = cursor.getInt(0);
+        } catch (Exception e){
+            e.printStackTrace();
         }
         return count;
     }

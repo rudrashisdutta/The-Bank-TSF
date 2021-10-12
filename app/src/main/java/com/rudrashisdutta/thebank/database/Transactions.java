@@ -100,10 +100,13 @@ public class Transactions extends Database{
     private static void getUpdates(Context context){
         try {
             updateOrder(context);
-            SQLiteDatabase database = new Customers(context).getReadableDatabase();
-            transactions.clear();
+            Transactions transactionsDB = new Transactions(context);
+            SQLiteDatabase database = transactionsDB.getReadableDatabase();
+            try {
+                transactions.clear();
+            } catch (Exception ignore){}
             transactions = new LinkedHashMap<>();
-            try(Cursor cursor = database.rawQuery("select * from " + TABLE + " ORDER BY " + ORDER + "", null)){
+            try(Cursor cursor = database.rawQuery("select * from " + TABLE + " ORDER BY " + columnNames.get(columnNames.size() - 2) + " " + ORDER + ";", null)){
                 while(cursor.moveToNext()){
                     transactions.put(cursor.getString(0), Transaction.build(cursor.getString(0), cursor.getLong(1), cursor.getLong(2), cursor.getLong(3), cursor.getDouble(4)));
                 }
@@ -113,7 +116,7 @@ public class Transactions extends Database{
         }
     }
 
-    public static List<Transaction> getCustomers(Context context) {
+    public static List<Transaction> getTransactions(Context context) {
         getUpdates(context);
         return (new ArrayList<>(transactions.values()));
     }
@@ -134,11 +137,17 @@ public class Transactions extends Database{
     }
 
     public static long count(Context context){
-        long count;
-        SQLiteDatabase database = new Transactions(context).getReadableDatabase();
-        try(Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null)){
-            cursor.moveToFirst();
-            count = cursor.getInt(0);
+        long count = 0;
+        try {
+            Transactions customers = new Transactions(context);
+            customers.getWritableDatabase();
+            SQLiteDatabase database = customers.getReadableDatabase();
+            try (Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null)) {
+                cursor.moveToFirst();
+                count = cursor.getInt(0);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
         return count;
     }

@@ -1,5 +1,6 @@
 package com.rudrashisdutta.thebank.logic;
 
+import android.content.Context;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,13 +19,13 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     private List<Fragment> fragments;
     private TextView supportActionBar;
 
-    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, TextView supportActionBar) {
+    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, TextView supportActionBar, Context context) {
         super(fragmentActivity);
         this.supportActionBar = supportActionBar;
         fragments = new ArrayList<Fragment>(){
             {
-                add(new CustomersFragment(supportActionBar));
-                add(new TransactionsFragment(supportActionBar));
+                add(new CustomersFragment(supportActionBar, context));
+                add(new TransactionsFragment(supportActionBar, context));
             }
         };
     }

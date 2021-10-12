@@ -1,6 +1,7 @@
 package com.rudrashisdutta.thebank.ui.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,10 +30,12 @@ public class TransactionsFragment extends Fragment {
     private String mParam2;
 
     private TextView supportActionBar;
+    private Context context;
 
-    public TransactionsFragment(TextView supportActionBar) {
+    public TransactionsFragment(TextView supportActionBar, Context context) {
         // Required empty public constructor
         this.supportActionBar = supportActionBar;
+        this.context = context;
     }
 
     /**
@@ -44,8 +47,8 @@ public class TransactionsFragment extends Fragment {
      * @return A new instance of fragment TransactionsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TransactionsFragment newInstance(String param1, String param2, TextView supportActionBar) {
-        TransactionsFragment fragment = new TransactionsFragment(supportActionBar);
+    public static TransactionsFragment newInstance(String param1, String param2, TextView supportActionBar, Context context) {
+        TransactionsFragment fragment = new TransactionsFragment(supportActionBar, context);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

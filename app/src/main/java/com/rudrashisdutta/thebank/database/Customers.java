@@ -3,6 +3,7 @@ package com.rudrashisdutta.thebank.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,15 +42,6 @@ public class Customers extends Database{
 
 
     public Customers(Context context) {
-        this(context, DB_NAME);
-    }
-    Customers(Context context, String DB_NAME) {
-        this(context, DB_NAME, DB_VER);
-    }
-    Customers(Context context, String DB_NAME, int DB_VER) {
-        this(context, DB_NAME, DB_VER, TABLE);
-    }
-    Customers(Context context, String DB_NAME, int DB_VER, String TABLE) {
         this(context, DB_NAME, DB_VER, TABLE, columns);
     }
     Customers(Context context, String DB_NAME, int DB_VER, String TABLE, LinkedHashMap<String, String> columns) {
@@ -118,10 +110,13 @@ public class Customers extends Database{
     private static void getUpdates(Context context){
         try {
             updateOrder(context);
-            SQLiteDatabase database = new Customers(context).getReadableDatabase();
-            customers.clear();
+            Customers customer = new Customers(context);
+            SQLiteDatabase database = customer.getReadableDatabase();
+            try {
+                customers.clear();
+            } catch (Exception ignore){}
             customers = new LinkedHashMap<>();
-            try(Cursor cursor = database.rawQuery("select * from " + TABLE + " ORDER BY " + ORDER + "", null)){
+            try(Cursor cursor = database.rawQuery("select * from " + TABLE + " ORDER BY " + columnNames.get(1) + " " + ORDER + ";", null)){
                 while(cursor.moveToNext()){
                     customers.put(cursor.getLong(0), Customer.build(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getDouble(7), cursor.getString(8)));
                 }
@@ -156,9 +151,10 @@ public class Customers extends Database{
             Customers customers = new Customers(context);
             customers.getWritableDatabase();
             SQLiteDatabase database = customers.getReadableDatabase();
-            Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null);
-            cursor.moveToFirst();
-            count = cursor.getInt(0);
+            try (Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null)) {
+                cursor.moveToFirst();
+                count = cursor.getInt(0);
+            }
         } catch (Exception e){
             e.printStackTrace();
         }

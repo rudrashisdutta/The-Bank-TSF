@@ -40,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
         activityNameOnSupportActionBar = mainActivity.toolBarActivityName;
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
+        new Thread(() -> Application.createDataIfNotFound(MainActivity.this)).start();
         mainScreen = mainActivity.mainScreen;
-        mainScreenAdapter = new ViewPagerAdapter(this, activityNameOnSupportActionBar);
+        mainScreenAdapter = new ViewPagerAdapter(this, activityNameOnSupportActionBar, this);
         mainScreen.setAdapter(mainScreenAdapter);
         new TabLayoutMediator(tabs, mainScreen, (tab, position) -> {
             if(position == 0){
@@ -52,7 +53,5 @@ public class MainActivity extends AppCompatActivity {
                 tab.setText("TRANSACTIONS");
             }
         }).attach();
-
-        new Thread(() -> Application.createDataIfNotFound(MainActivity.this)).start();
     }
 }

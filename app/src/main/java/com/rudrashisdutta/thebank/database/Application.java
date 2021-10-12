@@ -3,6 +3,7 @@ package com.rudrashisdutta.thebank.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,7 @@ public class Application extends Database{
         }
     };
     private static final List<String> columnNames = new ArrayList<>(columns.keySet());
-    private static final String KEY = "APP";
+    private static final String _key = "app";
     private static final int INITIALIZED = 1;
     public static final String ASCENDING = "ASC";
     public static final String DESCENDING = "DESC";
@@ -66,7 +67,7 @@ public class Application extends Database{
     private void updateApp(String columnName, String value){
         try {
             database = getWritableDatabase();
-            database.execSQL("update " + TABLE + " set " + columnName + " = " + value + " where " + columnNames.get(0) + " = " + KEY + ";");
+            database.execSQL("update " + TABLE + " set " + columnName + " = " + value + " where " + columnNames.get(0) + " = " + _key + ";");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -74,7 +75,7 @@ public class Application extends Database{
     private String getAppData(String columnName){
 
         database = getReadableDatabase();
-        try(Cursor cursor = database.rawQuery("select " + columnName + " from " + TABLE + " where " + columnNames.get(0) + " = " + KEY + ";", null)){
+        try(Cursor cursor = database.rawQuery("select " + columnName + " from " + TABLE + " where " + columnNames.get(0) + " = '" + _key + "';", null)){
             cursor.moveToFirst();
             return cursor.getString(0);
         }
@@ -163,7 +164,7 @@ public class Application extends Database{
     String formatCustomerAsString(String orderOfCustomers, String orderOfTransactions){
         StringBuilder customerAsString;
         customerAsString = new StringBuilder();
-        customerAsString.append("'").append(Application.KEY).append("',");
+        customerAsString.append("'").append(Application._key).append("',");
         customerAsString.append(Application.INITIALIZED).append(",'");
         customerAsString.append(orderOfCustomers).append("','");
         customerAsString.append(orderOfTransactions).append("'");

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidApps/Internships/TSF/TheBank/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21085526315789474" />
         <entry key="..\:/AndroidApps/Internships/TSF/TheBank/app/src/main/res/drawable/bg_order.xml" value="0.21085526315789474" />
         <entry key="..\:/AndroidApps/Internships/TSF/TheBank/app/src/main/res/drawable/bg_supportactionbar.xml" value="0.21085526315789474" />
         <entry key="..\:/AndroidApps/Internships/TSF/TheBank/app/src/main/res/drawable/bg_tabs.xml" value="0.21085526315789474" />
@@ -13,6 +14,7 @@
         <entry key="..\:/AndroidApps/Internships/TSF/TheBank/app/src/main/res/drawable/ic_transactions.xml" value="0.21085526315789474" />
         <entry key="..\:/AndroidApps/Internships/TSF/TheBank/app/src/main/res/drawable/ic_transactions_disabled.xml" value="0.21085526315789474" />
         <entry key="..\:/AndroidApps/Internships/TSF/TheBank/app/src/main/res/drawable/ic_transactions_enabled.xml" value="0.21085526315789474" />
+        <entry key="..\:/AndroidApps/Internships/TSF/TheBank/app/src/main/res/layout/activity_customer_list.xml" value="0.22" />
         <entry key="..\:/AndroidApps/Internships/TSF/TheBank/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/AndroidApps/Internships/TSF/TheBank/app/src/main/res/layout/fragment_customers.xml" value="0.1980263157894737" />
         <entry key="..\:/AndroidApps/Internships/TSF/TheBank/app/src/main/res/layout/fragment_transactions.xml" value="0.18" />

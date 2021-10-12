@@ -1,16 +1,27 @@
 package com.rudrashisdutta.thebank.ui.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.rudrashisdutta.thebank.CustomerAdapter;
 import com.rudrashisdutta.thebank.R;
+import com.rudrashisdutta.thebank.banking.Customer;
+import com.rudrashisdutta.thebank.database.Customers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,10 +40,15 @@ public class CustomersFragment extends Fragment {
     private String mParam2;
 
     private TextView supportActionBar;
+    private ListView customerListView;
+    private Context context;
 
-    public CustomersFragment(TextView supportActionBar) {
+    private List<Customer> customers;
+
+    public CustomersFragment(TextView supportActionBar, Context context) {
         // Required empty public constructor
         this.supportActionBar = supportActionBar;
+        this.context = context;
     }
 
     /**
@@ -44,8 +60,8 @@ public class CustomersFragment extends Fragment {
      * @return A new instance of fragment CustomersFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CustomersFragment newInstance(String param1, String param2, TextView supportActionBar) {
-        CustomersFragment fragment = new CustomersFragment(supportActionBar);
+    public static CustomersFragment newInstance(String param1, String param2, TextView supportActionBar, Context context) {
+        CustomersFragment fragment = new CustomersFragment(supportActionBar, context);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,10 +88,30 @@ public class CustomersFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         supportActionBar.setText("CUSTOMERS");
         supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);
+        customerListView = (ListView) this.requireView().findViewById(R.id.list_of_customers);
+        update();
+    }
+
+    public void update(){
+        customers = Customers.getCustomers(context);
+        List<String> names = new ArrayList<>();
+        for(Customer customer : customers){
+            names.add(customer.getCustomerName());
+        }
+        Log.e("AAAAA", names.toString());
+        CustomerAdapter listAdapter = new CustomerAdapter(context, R.layout.activity_customer_list, customers);
+        Log.e("AAAAA", listAdapter.getCount()+"");
+        customerListView.setAdapter(listAdapter);
+        Log.e("AAAAA", listAdapter.getCount()+"");
     }
 
 }

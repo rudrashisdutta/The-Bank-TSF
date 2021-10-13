@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheBank">
         <activity
-            android:name=".CustomerAdapter"
+            android:name=".logic.CustomerAdapter"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"

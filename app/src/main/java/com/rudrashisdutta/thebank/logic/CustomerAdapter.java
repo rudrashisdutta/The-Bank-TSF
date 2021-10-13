@@ -1,5 +1,6 @@
-package com.rudrashisdutta.thebank;
+package com.rudrashisdutta.thebank.logic;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.rudrashisdutta.thebank.R;
 import com.rudrashisdutta.thebank.banking.Customer;
 
 import java.util.List;
@@ -43,6 +45,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         return customers.get(position);
     }
 
+    @SuppressLint("StringFormatMatches")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

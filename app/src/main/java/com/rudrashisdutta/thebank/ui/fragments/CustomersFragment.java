@@ -3,24 +3,26 @@ package com.rudrashisdutta.thebank.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.rudrashisdutta.thebank.CustomerAdapter;
 import com.rudrashisdutta.thebank.R;
 import com.rudrashisdutta.thebank.banking.Customer;
+import com.rudrashisdutta.thebank.database.Application;
 import com.rudrashisdutta.thebank.database.Customers;
+import com.rudrashisdutta.thebank.logic.CustomerAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +43,8 @@ public class CustomersFragment extends Fragment {
 
     private TextView supportActionBar;
     private ListView customerListView;
+    private SwipeRefreshLayout refresh;
+    private ToggleButton order;
     private Context context;
 
     private List<Customer> customers;
@@ -76,8 +80,6 @@ public class CustomersFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        supportActionBar.setText("CUSTOMERS");
-        supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);
     }
 
     @Override
@@ -95,23 +97,36 @@ public class CustomersFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        initialize();
+    }
+    private void initialize(){
         supportActionBar.setText("CUSTOMERS");
         supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);
         customerListView = (ListView) this.requireView().findViewById(R.id.list_of_customers);
+        refresh = (SwipeRefreshLayout) this.requireView().findViewById(R.id.refresh_customers);
+        order = (ToggleButton) this.requireView().findViewById(R.id.order_of_customers);
         update();
+        refresh.setOnRefreshListener(() -> {
+            order.setChecked(getOrderButtonState());
+            update();
+            refresh.setRefreshing(false);
+        });
+        order.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            Application application = new Application(context);
+            application.updateCustomersOrder(isChecked);
+            update();
+        });
+        order.setChecked(getOrderButtonState());
     }
 
     public void update(){
         customers = Customers.getCustomers(context);
-        List<String> names = new ArrayList<>();
-        for(Customer customer : customers){
-            names.add(customer.getCustomerName());
-        }
-        Log.e("AAAAA", names.toString());
         CustomerAdapter listAdapter = new CustomerAdapter(context, R.layout.activity_customer_list, customers);
-        Log.e("AAAAA", listAdapter.getCount()+"");
         customerListView.setAdapter(listAdapter);
-        Log.e("AAAAA", listAdapter.getCount()+"");
+    }
+    private boolean getOrderButtonState(){
+        Application application = new Application(context);
+        return application.getCustomerOrder().equals(Application.ASCENDING);
     }
 
 }

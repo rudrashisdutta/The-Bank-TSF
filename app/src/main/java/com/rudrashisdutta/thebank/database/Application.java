@@ -35,7 +35,7 @@ public class Application extends Database{
 
     private SQLiteDatabase database;
 
-    Application(Context context) {
+    public Application(Context context) {
         this(context, DB_NAME, DB_VER, TABLE, columns);
     }
     Application(Context context, String DB_NAME, int DB_VER, String TABLE, LinkedHashMap<String, String> columns) {
@@ -67,7 +67,7 @@ public class Application extends Database{
     private void updateApp(String columnName, String value){
         try {
             database = getWritableDatabase();
-            database.execSQL("update " + TABLE + " set " + columnName + " = " + value + " where " + columnNames.get(0) + " = " + _key + ";");
+            database.execSQL("update " + TABLE + " set " + columnName + " = '" + value + "' where " + columnNames.get(0) + " = '" + _key + "';");
         }catch (Exception e){
             e.printStackTrace();
         }

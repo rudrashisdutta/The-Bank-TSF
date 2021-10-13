@@ -1,11 +1,13 @@
-package com.rudrashisdutta.thebank;
+package com.rudrashisdutta.thebank.ui.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class CustomerList extends Activity {
+import com.rudrashisdutta.thebank.R;
+
+public class CustomerList extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

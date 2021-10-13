@@ -12,16 +12,21 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true">
 
-        <ListView
-            android:id="@+id/list_of_customers"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_customers"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
+            android:animateLayoutChanges="true"
             app:layout_constraintBottom_toTopOf="@+id/order_of_customers"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:animateLayoutChanges="true"/>
+            app:layout_constraintTop_toTopOf="parent">
+            <ListView
+                android:id="@+id/list_of_customers"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ToggleButton
             android:id="@+id/order_of_customers"

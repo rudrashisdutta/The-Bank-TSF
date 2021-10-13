@@ -4,21 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.TransactionsFragment">
+    tools:context=".ui.fragments.TransactionsFragment"
+    android:animateLayoutChanges="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
 
-        <ListView
-            android:id="@+id/list_of_transactions"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_transformers"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
+            android:animateLayoutChanges="true"
             app:layout_constraintBottom_toTopOf="@+id/order_of_transactions"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+            <ListView
+                android:id="@+id/list_of_transactions"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ToggleButton
             android:id="@+id/order_of_transactions"

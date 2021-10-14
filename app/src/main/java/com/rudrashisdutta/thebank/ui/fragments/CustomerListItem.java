@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.rudrashisdutta.thebank.R;
 
-public class CustomerList extends AppCompatActivity {
+public class CustomerListItem extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

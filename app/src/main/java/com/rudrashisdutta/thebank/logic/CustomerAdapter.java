@@ -19,8 +19,8 @@ import java.util.Objects;
 
 public class CustomerAdapter extends ArrayAdapter<Customer> {
 
-    private List<Customer> customers;
-    private Context context;
+    private final List<Customer> customers;
+    private final Context context;
 
     public CustomerAdapter(@NonNull Context context, int resource, List<Customer> customers) {
         super(context, resource);
@@ -52,15 +52,15 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         CustomerListViewHolder customerListViewHolder = new CustomerListViewHolder();
-        View row = inflater.inflate(R.layout.activity_customer_list, parent, false);;
-        customerListViewHolder.customerName = (TextView) Objects.requireNonNull(row).findViewById(R.id.customer_name);
-        customerListViewHolder.accountId = (TextView) Objects.requireNonNull(row).findViewById(R.id.account_id);
-        customerListViewHolder.balance = (TextView) Objects.requireNonNull(row).findViewById(R.id.balance);
+        View list_item = inflater.inflate(R.layout.activity_customer_list, parent, false);
+        customerListViewHolder.customerName = Objects.requireNonNull(list_item).findViewById(R.id.customer_name);
+        customerListViewHolder.accountId = Objects.requireNonNull(list_item).findViewById(R.id.account_id);
+        customerListViewHolder.balance = Objects.requireNonNull(list_item).findViewById(R.id.balance);
 
-        row.setTag(customerListViewHolder);
+        list_item.setTag(customerListViewHolder);
         customerListViewHolder.customerName.setText(customers.get(position).getCustomerName());
         customerListViewHolder.accountId.setText(String.format(context.getString(R.string.account_id_textview_format), customers.get(position).getCustomerID()));
         customerListViewHolder.balance.setText(String.format(context.getString(R.string.balance_textview_format), customers.get(position).getBalance()));
-        return row;
+        return list_item;
     }
 }

@@ -1,5 +1,6 @@
 package com.rudrashisdutta.thebank.banking;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.rudrashisdutta.thebank.database.Customers;
@@ -38,6 +39,7 @@ public class Customer {
             add(Customer.build(100300, "S. Raghav", getDate("1989-08-26"), "raghav.2@hotmail.com", "3862634773", "A43SQB4E51A", "262675141676", 50000.102, "Manglabag, Cuttack, Odisha"));
         }
     };
+    @SuppressLint("SimpleDateFormat")
     private static String getDate(String source) {
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);

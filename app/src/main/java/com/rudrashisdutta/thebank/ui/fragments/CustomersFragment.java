@@ -41,11 +41,11 @@ public class CustomersFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private TextView supportActionBar;
+    private final TextView supportActionBar;
     private ListView customerListView;
     private SwipeRefreshLayout refresh;
     private ToggleButton order;
-    private Context context;
+    private final Context context;
 
     private List<Customer> customers;
 
@@ -102,9 +102,9 @@ public class CustomersFragment extends Fragment {
     private void initialize(){
         supportActionBar.setText("CUSTOMERS");
         supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);
-        customerListView = (ListView) this.requireView().findViewById(R.id.list_of_customers);
-        refresh = (SwipeRefreshLayout) this.requireView().findViewById(R.id.refresh_customers);
-        order = (ToggleButton) this.requireView().findViewById(R.id.order_of_customers);
+        customerListView = this.requireView().findViewById(R.id.list_of_customers);
+        refresh = this.requireView().findViewById(R.id.refresh_customers);
+        order = this.requireView().findViewById(R.id.order_of_customers);
         update();
         refresh.setOnRefreshListener(() -> {
             order.setChecked(getOrderButtonState());

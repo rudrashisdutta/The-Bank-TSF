@@ -21,11 +21,13 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
 
     private final List<Customer> customers;
     private final Context context;
+    private final int resource;
 
     public CustomerAdapter(@NonNull Context context, int resource, List<Customer> customers) {
         super(context, resource);
         this.customers = customers;
         this.context = context;
+        this.resource = resource;
     }
 
     static class CustomerListViewHolder{
@@ -52,7 +54,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         CustomerListViewHolder customerListViewHolder = new CustomerListViewHolder();
-        View list_item = inflater.inflate(R.layout.activity_customer_list, parent, false);
+        View list_item = inflater.inflate(resource, parent, false);
         customerListViewHolder.customerName = Objects.requireNonNull(list_item).findViewById(R.id.customer_name);
         customerListViewHolder.accountId = Objects.requireNonNull(list_item).findViewById(R.id.account_id);
         customerListViewHolder.balance = Objects.requireNonNull(list_item).findViewById(R.id.balance);

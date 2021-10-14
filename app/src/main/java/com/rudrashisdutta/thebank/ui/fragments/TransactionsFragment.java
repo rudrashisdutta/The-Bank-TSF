@@ -7,11 +7,23 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.rudrashisdutta.thebank.R;
+import com.rudrashisdutta.thebank.banking.Customer;
+import com.rudrashisdutta.thebank.banking.Transaction;
+import com.rudrashisdutta.thebank.database.Application;
+import com.rudrashisdutta.thebank.database.Customers;
+import com.rudrashisdutta.thebank.database.Transactions;
+import com.rudrashisdutta.thebank.logic.CustomerAdapter;
+import com.rudrashisdutta.thebank.logic.TransactionAdapter;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,8 +41,13 @@ public class TransactionsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private TextView supportActionBar;
-    private Context context;
+    private final TextView supportActionBar;
+    private ListView transactionListView;
+    private SwipeRefreshLayout refresh;
+    private ToggleButton order;
+    private final Context context;
+
+    private List<Transaction> transactions;
 
     public TransactionsFragment(TextView supportActionBar, Context context) {
         // Required empty public constructor
@@ -77,7 +94,35 @@ public class TransactionsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+    private void initialize(){
         supportActionBar.setText("TRANSACTIONS");
         supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);
+        transactionListView = this.requireView().findViewById(R.id.list_of_transactions);
+        refresh = this.requireView().findViewById(R.id.refresh_transformers);
+        order = this.requireView().findViewById(R.id.order_of_transactions);
+        update();
+        refresh.setOnRefreshListener(() -> {
+            order.setChecked(getOrderButtonState());
+            update();
+            refresh.setRefreshing(false);
+        });
+        order.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            Application application = new Application(context);
+            application.updateTransactionsOrder(isChecked);
+            update();
+        });
+        order.setChecked(getOrderButtonState());
+    }
+
+
+    public void update(){
+        transactions = Transactions.getTransactions(context);
+        TransactionAdapter listAdapter = new TransactionAdapter(context, R.layout.activity_customer_list, transactions);
+        transactionListView.setAdapter(listAdapter);
+    }
+    private boolean getOrderButtonState(){
+        Application application = new Application(context);
+        return application.getTransactionsOrder().equals(Application.ASCENDING);
     }
 }

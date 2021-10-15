@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class Banking extends Database{
 
-    private static String CUSTOMER_TABLE = "CUSTOMERS";
-    private static String TRANSACTION_TABLE = "TRANSACTIONS";
-    private static List<String> TABLES = new ArrayList<String>() {
+    protected static final String CUSTOMER_TABLE = "CUSTOMERS";
+    protected static final String TRANSACTION_TABLE = "TRANSACTIONS";
+    private static final List<String> TABLES = new ArrayList<String>() {
             {
                 add(CUSTOMER_TABLE);
                 add(TRANSACTION_TABLE);

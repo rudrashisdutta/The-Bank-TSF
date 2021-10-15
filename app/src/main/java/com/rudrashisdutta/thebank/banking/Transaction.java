@@ -2,8 +2,6 @@ package com.rudrashisdutta.thebank.banking;
 
 import android.content.Context;
 
-import androidx.annotation.Nullable;
-
 import com.rudrashisdutta.thebank.database.Customers;
 import com.rudrashisdutta.thebank.database.Transactions;
 

@@ -31,12 +31,10 @@ import java.util.List;
  */
 public class CustomersFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -62,7 +60,6 @@ public class CustomersFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment CustomersFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static CustomersFragment newInstance(String param1, String param2, TextView supportActionBar, Context context) {
         CustomersFragment fragment = new CustomersFragment(supportActionBar, context);
         Bundle args = new Bundle();
@@ -99,7 +96,7 @@ public class CustomersFragment extends Fragment {
         initialize();
     }
     private void initialize(){
-        supportActionBar.setText("CUSTOMERS");
+        supportActionBar.setText(R.string.customers);
         supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);
         customerListView = this.requireView().findViewById(R.id.list_of_customers);
         refresh = this.requireView().findViewById(R.id.refresh_customers);

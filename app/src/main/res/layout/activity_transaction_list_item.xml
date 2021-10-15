@@ -7,12 +7,20 @@
     tools:context=".ui.fragments.TransactionListItem">
 
     <TextView
+        android:id="@+id/transactionID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/transactionInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
-        android:text="Sender -> Receiver"
+        android:text="@string/transaction_info"
         android:textColor="@color/base_theme_1"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -20,14 +28,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/amount"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"
         android:alpha="0.75"
-        android:text="Amount"
+        android:text="date"
         android:textColor="@color/base_theme_1"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -36,15 +44,14 @@
         app:layout_constraintTop_toBottomOf="@id/transactionInfo" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
-        android:text="date"
+        android:text="@string/amount"
         android:textColor="@color/base_theme_1"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/transactionInfo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

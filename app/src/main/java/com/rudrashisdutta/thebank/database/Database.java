@@ -3,7 +3,6 @@ package com.rudrashisdutta.thebank.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -17,15 +16,14 @@ public class Database extends SQLiteOpenHelper {
     protected String DB_NAME;
     protected int DB_VER;
 
-    private List<String> TABLES;
+    private final List<String> TABLES;
 
-    private Map<String, String> columns;
+    private final Map<String, String> columns;
 
     protected SQLiteDatabase database;
 
     Database(Context context, String DB_NAME, int DB_VER, List<String> TABLES, Map<String, String> columns){
         super(context, DB_NAME, null, DB_VER);
-        Log.e("EEE","sfdgshouguyds "+TABLES.toString());
         this.context = context;
         this. DB_NAME = DB_NAME;
         this.DB_VER = DB_VER;
@@ -37,9 +35,7 @@ public class Database extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try{
             for(String TABLE : TABLES){
-                Log.e("t", "CREATING!");
                 sqLiteDatabase.execSQL("create table " + TABLE + " (" + columns.get(TABLE) + ");");
-                Log.e("t", "create table " + TABLE + " (" + columns.get(TABLE) + ");");
             }
         } catch (Exception e){
             e.printStackTrace();

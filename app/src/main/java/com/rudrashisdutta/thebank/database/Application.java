@@ -3,7 +3,6 @@ package com.rudrashisdutta.thebank.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -138,9 +137,10 @@ public class Application extends Database{
             Application application = new Application(context);
             application.getWritableDatabase();
             SQLiteDatabase database = application.getReadableDatabase();
-            Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null);
-            cursor.moveToFirst();
-            count = cursor.getInt(0);
+            try (Cursor cursor = database.rawQuery("select count(*) from " + TABLE + ";", null)) {
+                cursor.moveToFirst();
+                count = cursor.getInt(0);
+            }
         } catch (Exception e){
             e.printStackTrace();
         }

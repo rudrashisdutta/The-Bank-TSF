@@ -3,7 +3,6 @@ package com.rudrashisdutta.thebank.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +20,7 @@ public class Customers extends Banking{
     private static final String DB_NAME = "BANKING";
     private static final int DB_VER = 1;
 
-    private static final String TABLE = "CUSTOMERS";
+    private static final String TABLE = CUSTOMER_TABLE;
     private static final LinkedHashMap<String, String> columns = customerTableColumns;
 
 

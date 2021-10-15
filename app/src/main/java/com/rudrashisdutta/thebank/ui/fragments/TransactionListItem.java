@@ -1,8 +1,8 @@
 package com.rudrashisdutta.thebank.ui.fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.rudrashisdutta.thebank.R;
 

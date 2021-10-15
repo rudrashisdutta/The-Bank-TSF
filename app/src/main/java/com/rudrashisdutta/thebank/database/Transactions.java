@@ -13,7 +13,6 @@ import com.rudrashisdutta.thebank.banking.Transaction;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Transactions extends Banking{
 
@@ -22,7 +21,7 @@ public class Transactions extends Banking{
     private static final String DB_NAME = "BANKING";
     private static final int DB_VER = 1;
 
-    private static final String TABLE = "TRANSACTIONS";
+    private static final String TABLE = TRANSACTION_TABLE;
     private static final LinkedHashMap<String, String> columns = transactionTableColumns;
 
     private static final List<String> columnNames = new ArrayList<>(columns.keySet());
@@ -35,8 +34,6 @@ public class Transactions extends Banking{
     }
     Transactions(Context context, String DB_NAME, int DB_VER) {
         super(context, DB_NAME, DB_VER);
-        Log.e("EEE","sfdgsds");
-//        columnNames = new ArrayList<>(columns.keySet());
         this.context = context;
     }
 
@@ -80,7 +77,9 @@ public class Transactions extends Banking{
         return transactionAsString.toString();
     }
     private static void updateOrder(Context context){
+        Log.e("GETTING", "BUBNUN");
         ORDER = new Application(context).getTransactionsOrder();
+        Log.e("GETTING", ORDER);
     }
 
 
@@ -137,19 +136,6 @@ public class Transactions extends Banking{
             e.printStackTrace();
         }
         return count;
-    }
-
-    public static void printAllColumnNames(Context context){
-        Transactions transactions = new Transactions(context);
-        SQLiteDatabase database = transactions.getReadableDatabase();
-        try(Cursor cursor = database.rawQuery("select * from " + TABLE + ";", null)){
-            cursor.moveToFirst();
-            StringBuilder str = new StringBuilder();
-            for(String x : cursor.getColumnNames()){
-                str.append(x);
-            }
-            Log.e("AKIRA GAANDU", str.toString());
-        }
     }
 
 }

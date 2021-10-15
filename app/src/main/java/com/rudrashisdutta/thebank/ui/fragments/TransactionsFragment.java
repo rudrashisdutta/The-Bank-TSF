@@ -29,12 +29,10 @@ import java.util.List;
  */
 public class TransactionsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -60,7 +58,6 @@ public class TransactionsFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment TransactionsFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static TransactionsFragment newInstance(String param1, String param2, TextView supportActionBar, Context context) {
         TransactionsFragment fragment = new TransactionsFragment(supportActionBar, context);
         Bundle args = new Bundle();
@@ -77,8 +74,6 @@ public class TransactionsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        supportActionBar.setText("TRANSACTIONS");
-        supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);
     }
 
     @Override
@@ -91,12 +86,13 @@ public class TransactionsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        initialize();
     }
     private void initialize(){
-        supportActionBar.setText("TRANSACTIONS");
+        supportActionBar.setText(R.string.transactions);
         supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);
         transactionListView = this.requireView().findViewById(R.id.list_of_transactions);
-        refresh = this.requireView().findViewById(R.id.refresh_transformers);
+        refresh = this.requireView().findViewById(R.id.refresh_transactions);
         order = this.requireView().findViewById(R.id.order_of_transactions);
         update();
         refresh.setOnRefreshListener(() -> {

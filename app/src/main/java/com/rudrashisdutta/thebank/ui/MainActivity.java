@@ -12,7 +12,6 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.rudrashisdutta.thebank.R;
 import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.database.Application;
-import com.rudrashisdutta.thebank.database.Transactions;
 import com.rudrashisdutta.thebank.databinding.ActivityMainBinding;
 import com.rudrashisdutta.thebank.logic.MakeTransaction;
 import com.rudrashisdutta.thebank.logic.ViewPagerAdapter;
@@ -43,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
         activityNameOnSupportActionBar = mainActivity.toolBarActivityName;
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
-        new Thread(() -> Application.createDataIfNotFound(MainActivity.this)).start();
+        new Thread(() -> {
+            Application.createDataIfNotFound(MainActivity.this);
+            MakeTransaction.build(Customer.get(this, 100291), Customer.get(this, 100292), 123.23, this).make();
+        }).start();
         mainScreen = mainActivity.mainScreen;
         mainScreenAdapter = new ViewPagerAdapter(this, activityNameOnSupportActionBar, this);
         mainScreen.setAdapter(mainScreenAdapter);
@@ -56,9 +58,5 @@ public class MainActivity extends AppCompatActivity {
                 tab.setText("TRANSACTIONS");
             }
         }).attach();
-        Transactions transactions = new Transactions(this);
-        transactions.getWritableDatabase();
-        MakeTransaction.build(Customer.get(this, 100291), Customer.get(this, 100292), 123.23, this).make();
-        Transactions.printAllColumnNames(this);
     }
 }

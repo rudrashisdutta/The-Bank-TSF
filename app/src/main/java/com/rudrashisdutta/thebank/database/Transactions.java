@@ -53,6 +53,17 @@ public class Transactions extends Database{
         this.context = context;
     }
 
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        super.onCreate(sqLiteDatabase);
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        super.onUpgrade(sqLiteDatabase, i, i1);
+    }
+
     public boolean store(Transaction transaction){
         boolean success = false;
         try {

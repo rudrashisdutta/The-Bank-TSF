@@ -15,7 +15,6 @@ import com.rudrashisdutta.thebank.R;
 import com.rudrashisdutta.thebank.banking.Transaction;
 
 import java.util.List;
-import java.util.Objects;
 
 public class TransactionAdapter extends ArrayAdapter<Transaction> {
 
@@ -53,7 +52,7 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         TransactionListViewHolder transactionListViewHolder = new TransactionListViewHolder();
-        View list_item = inflater.inflate(R.layout.activity_customer_list, parent, false);
+        View list_item = inflater.inflate(R.layout.activity_customer_list_item, parent, false);
 //        transactionListViewHolder.transactionID = Objects.requireNonNull(list_item).findViewById(R.id.balance);
 //        transactionListViewHolder.senderID_And_ReceiverID = Objects.requireNonNull(list_item).findViewById(R.id.customer_name);
 //        transactionListViewHolder.amount = Objects.requireNonNull(list_item).findViewById(R.id.balance);
@@ -66,6 +65,6 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
 //        transactionListViewHolder.date.setText(String.format(context.getString(R.string.balance_textview_format), customers.get(position).getBalance()));
         return list_item;
     }
-    //TODO Create the 'activity_transaction_list' and everything needed to set up line 57 to 66
+    //TODO Create the 'activity_transaction_list_item' and everything needed to set up line 57 to 66
 
 }

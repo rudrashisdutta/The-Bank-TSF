@@ -15,12 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.rudrashisdutta.thebank.R;
-import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.banking.Transaction;
 import com.rudrashisdutta.thebank.database.Application;
-import com.rudrashisdutta.thebank.database.Customers;
 import com.rudrashisdutta.thebank.database.Transactions;
-import com.rudrashisdutta.thebank.logic.CustomerAdapter;
 import com.rudrashisdutta.thebank.logic.TransactionAdapter;
 
 import java.util.List;
@@ -118,7 +115,7 @@ public class TransactionsFragment extends Fragment {
 
     public void update(){
         transactions = Transactions.getTransactions(context);
-        TransactionAdapter listAdapter = new TransactionAdapter(context, R.layout.activity_customer_list, transactions);
+        TransactionAdapter listAdapter = new TransactionAdapter(context, R.layout.activity_transaction_list_item, transactions);
         transactionListView.setAdapter(listAdapter);
     }
     private boolean getOrderButtonState(){

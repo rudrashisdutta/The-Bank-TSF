@@ -7,7 +7,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -121,7 +120,7 @@ public class CustomersFragment extends Fragment {
 
     public void update(){
         customers = Customers.getCustomers(context);
-        CustomerAdapter listAdapter = new CustomerAdapter(context, R.layout.activity_customer_list, customers);
+        CustomerAdapter listAdapter = new CustomerAdapter(context, R.layout.activity_customer_list_item, customers);
         customerListView.setAdapter(listAdapter);
     }
     private boolean getOrderButtonState(){

@@ -2,5 +2,9 @@
     <string name="app_name">The Bank</string>
 
     <string name="account_id_textview_format">ACCOUNT ID: %s</string>
-    <string name="balance_textview_format">BAL: %s</string>
+    <string name="balance_textview_format">₹ %s</string>
+
+    <string name="transaction_info">%s  ➡️ %s</string>
+    <string name="amount">₹ %s</string>
+
 </resources>

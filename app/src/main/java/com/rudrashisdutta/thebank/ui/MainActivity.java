@@ -10,8 +10,11 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.rudrashisdutta.thebank.R;
+import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.database.Application;
+import com.rudrashisdutta.thebank.database.Transactions;
 import com.rudrashisdutta.thebank.databinding.ActivityMainBinding;
+import com.rudrashisdutta.thebank.logic.MakeTransaction;
 import com.rudrashisdutta.thebank.logic.ViewPagerAdapter;
 
 import java.util.Objects;
@@ -53,5 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 tab.setText("TRANSACTIONS");
             }
         }).attach();
+        Transactions transactions = new Transactions(this);
+        transactions.getWritableDatabase();
+        MakeTransaction.build(Customer.get(this, 100291), Customer.get(this, 100292), 123.23, this).make();
     }
 }

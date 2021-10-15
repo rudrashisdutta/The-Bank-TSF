@@ -2,6 +2,8 @@ package com.rudrashisdutta.thebank.banking;
 
 import android.content.Context;
 
+import androidx.annotation.Nullable;
+
 import com.rudrashisdutta.thebank.database.Transactions;
 
 public class Transaction {
@@ -60,6 +62,14 @@ public class Transaction {
         transaction.setCustomerID(customerID);
         transaction.setReceiverID(receiverID);
         transaction.setTransactionTime(transactionTime);
+        transaction.setAmount(amount);
+        return transaction;
+    }
+    public static Transaction build(String transactionID, long customerID, long receiverID, double amount){
+        Transaction transaction = new Transaction();
+        transaction.setTransactionID(transactionID);
+        transaction.setCustomerID(customerID);
+        transaction.setReceiverID(receiverID);
         transaction.setAmount(amount);
         return transaction;
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.Nullable;
 
+import com.rudrashisdutta.thebank.database.Customers;
 import com.rudrashisdutta.thebank.database.Transactions;
 
 public class Transaction {
@@ -73,12 +74,32 @@ public class Transaction {
         transaction.setAmount(amount);
         return transaction;
     }
-    public static Transaction build(Transaction transaction, long transactionTime){
+    public static Transaction build(Context context, Transaction transaction, long transactionTime){
+        String ID = generateTransactionID(transactionTime, Customers.get(context, transaction.getCustomerID()).getCustomerName(), Customers.get(context, transaction.getReceiverID()).getCustomerName());
+        transaction.setTransactionID(ID);
         transaction.setTransactionTime(transactionTime);
         return transaction;
     }
 
     public static Transaction get(Context context, String transactionID){
         return Transactions.get(context, transactionID);
+    }
+
+    private static String generateTransactionID(long transactionTime, String senderName, String receiverName){
+        StringBuilder ID = new StringBuilder();
+        StringBuilder senderInitials = new StringBuilder();
+        StringBuilder receiverInitials = new StringBuilder();
+        for(String initial : senderName.split(" ")){
+            try{
+                senderInitials.append(initial.charAt(0));
+            } catch (Exception ignore){}
+        }
+        for(String initial : receiverName.split(" ")){
+            try{
+                receiverInitials.append(initial.charAt(0));
+            } catch (Exception ignore){}
+        }
+        ID.append(senderInitials).append(transactionTime).append(receiverInitials);
+        return ID.toString();
     }
 }

@@ -3,6 +3,7 @@ package com.rudrashisdutta.thebank.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,8 +13,9 @@ import com.rudrashisdutta.thebank.banking.Transaction;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Transactions extends Database{
+public class Transactions extends Banking{
 
     private Context context;
 
@@ -21,54 +23,28 @@ public class Transactions extends Database{
     private static final int DB_VER = 1;
 
     private static final String TABLE = "TRANSACTIONS";
-    private static LinkedHashMap<String, String> columns = new LinkedHashMap<String, String>(){
-        {
-            put("_transaction_id", "text primary key");
-            put("customer_id", "INTEGER");
-            put("receiver_id", "INTEGER");
-            put("transaction_time", "INTEGER");
-            put("amount", "REAL");
-        }
-    };
-    private static List<String> columnNames = new ArrayList<>(columns.keySet());
+    private static final LinkedHashMap<String, String> columns = transactionTableColumns;
+
+    private static final List<String> columnNames = new ArrayList<>(columns.keySet());
 
     private static LinkedHashMap<String, Transaction> transactions;
     private static String ORDER;
 
     public Transactions(Context context) {
-        this(context, DB_NAME);
-    }
-    Transactions(Context context, String DB_NAME) {
         this(context, DB_NAME, DB_VER);
     }
     Transactions(Context context, String DB_NAME, int DB_VER) {
-        this(context, DB_NAME, DB_VER, TABLE);
-    }
-    Transactions(Context context, String DB_NAME, int DB_VER, String TABLE) {
-        this(context, DB_NAME, DB_VER, TABLE, columns);
-    }
-    Transactions(Context context, String DB_NAME, int DB_VER, String TABLE, LinkedHashMap<String, String> columns) {
-        super(context, DB_NAME, DB_VER, TABLE, columns);
+        super(context, DB_NAME, DB_VER);
+        Log.e("EEE","sfdgsds");
 //        columnNames = new ArrayList<>(columns.keySet());
         this.context = context;
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        super.onCreate(sqLiteDatabase);
-
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        super.onUpgrade(sqLiteDatabase, i, i1);
     }
 
     public boolean store(Transaction transaction){
         boolean success = false;
         try {
             database = getWritableDatabase();
-            database.execSQL("insert into " + TABLE + " (" + formatColumnNamesAsString() + ") values(" + formatCustomerAsString(transaction) + ");");
+            database.execSQL("insert into " + TABLE + " (" + formatColumnNamesAsString() + ") values(" + formatTransactionAsString(transaction) + ");");
             success = true;
         } catch (Exception e){
             e.printStackTrace();
@@ -93,7 +69,7 @@ public class Transactions extends Database{
         return null;
     }
     private static @NonNull
-    String formatCustomerAsString(Transaction transaction){
+    String formatTransactionAsString(Transaction transaction){
         StringBuilder transactionAsString;
         transactionAsString = new StringBuilder();
         transactionAsString.append("'").append(transaction.getTransactionID()).append("',");
@@ -161,6 +137,19 @@ public class Transactions extends Database{
             e.printStackTrace();
         }
         return count;
+    }
+
+    public static void printAllColumnNames(Context context){
+        Transactions transactions = new Transactions(context);
+        SQLiteDatabase database = transactions.getReadableDatabase();
+        try(Cursor cursor = database.rawQuery("select * from " + TABLE + ";", null)){
+            cursor.moveToFirst();
+            StringBuilder str = new StringBuilder();
+            for(String x : cursor.getColumnNames()){
+                str.append(x);
+            }
+            Log.e("AKIRA GAANDU", str.toString());
+        }
     }
 
 }

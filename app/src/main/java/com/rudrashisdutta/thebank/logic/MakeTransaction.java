@@ -1,6 +1,7 @@
 package com.rudrashisdutta.thebank.logic;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.banking.Transaction;
@@ -27,13 +28,16 @@ public class MakeTransaction {
     private Transaction getTransaction() {
         return transaction;
     }
-    private boolean updateBalance(long customerID){
+    private boolean updateBalance(long senderID, long receiverID){
         boolean success = false;
         try {
             Customers customers = new Customers(context);
-            Customer customer = Customers.get(context, customerID);
-            double newBalance = customer.getBalance() - getTransaction().getAmount();
-            customers.updateBalance(Customers.get(context, getTransaction().getCustomerID()), newBalance);
+            Customer sender = Customers.get(context, senderID);
+            Customer receiver = Customers.get(context, receiverID);
+            double senderNewBalance = sender.getBalance() - getTransaction().getAmount();
+            double receiverNewBalance = receiver.getBalance() + getTransaction().getAmount();
+            customers.updateBalance(sender, senderNewBalance);
+            customers.updateBalance(receiver, receiverNewBalance);
             success = true;
         } catch (Exception e){
             e.printStackTrace();
@@ -45,12 +49,12 @@ public class MakeTransaction {
         try {
             Transactions transactions = new Transactions(context);
             Date dateTimeNow = new Date();
-            Transaction.build(transaction, dateTimeNow.getTime());
+            Transaction.build(context, transaction, dateTimeNow.getTime());
             boolean transactionSuccessful = transactions.store(getTransaction());
             if(transactionSuccessful){
-                updateBalance(getTransaction().getCustomerID());
-                updateBalance(getTransaction().getReceiverID());
+                updateBalance(getTransaction().getCustomerID(), getTransaction().getReceiverID());
             }
+            Log.e("XYZZZZZZ", Transactions.count(context)+"");
         } catch (Exception e){
             e.printStackTrace();
         }

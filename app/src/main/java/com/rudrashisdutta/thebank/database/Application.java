@@ -11,8 +11,10 @@ import androidx.annotation.Nullable;
 import com.rudrashisdutta.thebank.banking.Customer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Application extends Database{
 
@@ -27,6 +29,15 @@ public class Application extends Database{
             put("order_transactions", "text"); // ASC or DESC
         }
     };
+    private static String getApplicationTableColumns() {
+        return formatColumnNamesWithDataTypes(columns);
+    }
+    private static final Map<String, String> passColumnsToSuper = new HashMap<String, String>(){
+        {
+            put(TABLE, getApplicationTableColumns());
+        }
+    };
+
     private static final List<String> columnNames = new ArrayList<>(columns.keySet());
     private static final String _key = "app";
     private static final int INITIALIZED = 1;
@@ -35,11 +46,17 @@ public class Application extends Database{
 
     private SQLiteDatabase database;
 
+    private static List<String> TABLES = new ArrayList<String>() {
+        {
+            add(TABLE);
+        }
+    };
+
     public Application(Context context) {
-        this(context, DB_NAME, DB_VER, TABLE, columns);
+        this(context, DB_NAME, DB_VER);
     }
-    Application(Context context, String DB_NAME, int DB_VER, String TABLE, LinkedHashMap<String, String> columns) {
-        super(context, DB_NAME, DB_VER, TABLE, columns);
+    Application(Context context, String DB_NAME, int DB_VER) {
+        super(context, DB_NAME, DB_VER, TABLES, passColumnsToSuper);
     }
 
     public void updateCustomersOrder(boolean ascending){
@@ -98,11 +115,17 @@ public class Application extends Database{
             count = 0;
             try{
                 count = Customers.count(context);
-            } catch (Exception e){
-                e.printStackTrace();
-            }
+            } catch (Exception ignore){}
             if(count != 10){
                 initializeCustomers(context);
+            }
+            count = 0;
+            try{
+                count = Transactions.count(context);
+            } catch (Exception ignore){}
+            if(count == 0){
+                Transactions transactions = new Transactions(context);
+                transactions.getWritableDatabase();
             }
         } catch (Exception e){
             e.printStackTrace();

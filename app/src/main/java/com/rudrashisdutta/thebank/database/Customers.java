@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class Customers extends Database{
+public class Customers extends Banking{
 
     private Context context;
 
@@ -22,19 +22,9 @@ public class Customers extends Database{
     private static final int DB_VER = 1;
 
     private static final String TABLE = "CUSTOMERS";
-    private static final LinkedHashMap<String, String> columns = new LinkedHashMap<String, String>(){
-        {
-            put("_customer_id", "INTEGER primary key");
-            put("customer_name", "text");
-            put("DOB", "text");
-            put("email", "text");
-            put("mobile", "text");
-            put("PAN", "text");
-            put("aadhaar", "text");
-            put("balance", "REAL");
-            put("address", "text");
-        }
-    };
+    private static final LinkedHashMap<String, String> columns = customerTableColumns;
+
+
     private static final List<String> columnNames = new ArrayList<>(columns.keySet());
 
     private static LinkedHashMap<Long, Customer> customers;
@@ -42,10 +32,10 @@ public class Customers extends Database{
 
 
     public Customers(Context context) {
-        this(context, DB_NAME, DB_VER, TABLE, columns);
+        this(context, DB_NAME, DB_VER);
     }
-    Customers(Context context, String DB_NAME, int DB_VER, String TABLE, LinkedHashMap<String, String> columns) {
-        super(context, DB_NAME, DB_VER, TABLE, columns);
+    Customers(Context context, String DB_NAME, int DB_VER) {
+        super(context, DB_NAME, DB_VER);
 //        columnNames = new ArrayList<>(columns.keySet());
         this.context = context;
     }
@@ -121,6 +111,7 @@ public class Customers extends Database{
                     customers.put(cursor.getLong(0), Customer.build(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getDouble(7), cursor.getString(8)));
                 }
             }
+            customer.close();
         } catch (Exception e){
             e.printStackTrace();
         }

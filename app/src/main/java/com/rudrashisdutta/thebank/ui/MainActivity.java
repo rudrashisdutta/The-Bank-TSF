@@ -59,5 +59,6 @@ public class MainActivity extends AppCompatActivity {
         Transactions transactions = new Transactions(this);
         transactions.getWritableDatabase();
         MakeTransaction.build(Customer.get(this, 100291), Customer.get(this, 100292), 123.23, this).make();
+        Transactions.printAllColumnNames(this);
     }
 }

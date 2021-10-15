@@ -3,10 +3,12 @@ package com.rudrashisdutta.thebank.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Database extends SQLiteOpenHelper {
@@ -15,25 +17,30 @@ public class Database extends SQLiteOpenHelper {
     protected String DB_NAME;
     protected int DB_VER;
 
-    private String TABLE;
+    private List<String> TABLES;
 
-    private LinkedHashMap<String, String> columns;
+    private Map<String, String> columns;
 
     protected SQLiteDatabase database;
 
-    Database(Context context, String DB_NAME, int DB_VER, String TABLE, LinkedHashMap<String, String> columns){
+    Database(Context context, String DB_NAME, int DB_VER, List<String> TABLES, Map<String, String> columns){
         super(context, DB_NAME, null, DB_VER);
+        Log.e("EEE","sfdgshouguyds "+TABLES.toString());
         this.context = context;
         this. DB_NAME = DB_NAME;
         this.DB_VER = DB_VER;
-        this.TABLE = TABLE;
+        this.TABLES = TABLES;
         this.columns = columns;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try{
-            sqLiteDatabase.execSQL("create table " + TABLE + " (" + formatColumnNamesWithDataTypes() + ");");
+            for(String TABLE : TABLES){
+                Log.e("t", "CREATING!");
+                sqLiteDatabase.execSQL("create table " + TABLE + " (" + columns.get(TABLE) + ");");
+                Log.e("t", "create table " + TABLE + " (" + columns.get(TABLE) + ");");
+            }
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -42,14 +49,15 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         try{
-            sqLiteDatabase.execSQL("drop table if exists " + TABLE);
+            for(String TABLE : TABLES){
+                sqLiteDatabase.execSQL("drop table if exists " + TABLE);
+            }
             onCreate(sqLiteDatabase);
         } catch (Exception e){
             e.printStackTrace();
         }
     }
-
-    private @Nullable String formatColumnNamesWithDataTypes(){
+    protected static @Nullable String formatColumnNamesWithDataTypes(LinkedHashMap<String, String> columns){
         try{
             StringBuilder columnNamesWithDataTypes = new StringBuilder();
             for(Map.Entry<String, String> column: columns.entrySet()){

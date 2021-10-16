@@ -44,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
         new Thread(() -> {
             Application.createDataIfNotFound(MainActivity.this);
-            MakeTransaction.build(Customer.get(this, 100291), Customer.get(this, 100292), 123.23, this).make();
+            try {
+                MakeTransaction.build(Customer.get(this, 100291), Customer.get(this, 100292), 123.23, this).make();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }).start();
         mainScreen = mainActivity.mainScreen;
         mainScreenAdapter = new ViewPagerAdapter(this, activityNameOnSupportActionBar, this);

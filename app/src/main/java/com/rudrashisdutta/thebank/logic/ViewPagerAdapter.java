@@ -18,14 +18,16 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
 
     private List<Fragment> fragments;
     private TextView supportActionBar;
+    private static FragmentActivity fragmentActivity;
 
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, TextView supportActionBar, Context context) {
         super(fragmentActivity);
         this.supportActionBar = supportActionBar;
+        ViewPagerAdapter.fragmentActivity = fragmentActivity;
         fragments = new ArrayList<Fragment>(){
             {
-                add(new CustomersFragment(supportActionBar, context));
-                add(new TransactionsFragment(supportActionBar, context));
+                add(new CustomersFragment());
+                add(new TransactionsFragment());
             }
         };
     }
@@ -39,5 +41,9 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     @Override
     public int getItemCount() {
         return fragments.size();
+    }
+
+    public static FragmentActivity getFragmentActivity() {
+        return fragmentActivity;
     }
 }

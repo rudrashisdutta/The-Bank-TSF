@@ -19,6 +19,7 @@ import com.rudrashisdutta.thebank.banking.Transaction;
 import com.rudrashisdutta.thebank.database.Application;
 import com.rudrashisdutta.thebank.database.Transactions;
 import com.rudrashisdutta.thebank.logic.TransactionAdapter;
+import com.rudrashisdutta.thebank.logic.ViewPagerAdapter;
 
 import java.util.List;
 
@@ -36,18 +37,23 @@ public class TransactionsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private final TextView supportActionBar;
+    private TextView supportActionBar;
     private ListView transactionListView;
     private SwipeRefreshLayout refresh;
     private ToggleButton order;
-    private final Context context;
+    private Context context;
 
+    private static TransactionsFragment transactionsFragment;
     private List<Transaction> transactions;
 
+    public TransactionsFragment(){
+
+    }
     public TransactionsFragment(TextView supportActionBar, Context context) {
         // Required empty public constructor
         this.supportActionBar = supportActionBar;
         this.context = context;
+        transactionsFragment = this;
     }
 
     /**
@@ -59,7 +65,7 @@ public class TransactionsFragment extends Fragment {
      * @return A new instance of fragment TransactionsFragment.
      */
     public static TransactionsFragment newInstance(String param1, String param2, TextView supportActionBar, Context context) {
-        TransactionsFragment fragment = new TransactionsFragment(supportActionBar, context);
+        TransactionsFragment fragment = new TransactionsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -89,6 +95,8 @@ public class TransactionsFragment extends Fragment {
         initialize();
     }
     private void initialize(){
+        supportActionBar = (TextView) ViewPagerAdapter.getFragmentActivity().findViewById(R.id.toolBarActivityName);
+        context = ViewPagerAdapter.getFragmentActivity().getApplicationContext();
         supportActionBar.setText(R.string.transactions);
         supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);
         transactionListView = this.requireView().findViewById(R.id.list_of_transactions);

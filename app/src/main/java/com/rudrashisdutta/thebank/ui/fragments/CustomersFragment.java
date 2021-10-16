@@ -4,12 +4,10 @@ package com.rudrashisdutta.thebank.ui.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -24,8 +22,8 @@ import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.database.Application;
 import com.rudrashisdutta.thebank.database.Customers;
 import com.rudrashisdutta.thebank.logic.CustomerAdapter;
+import com.rudrashisdutta.thebank.logic.ViewPagerAdapter;
 import com.rudrashisdutta.thebank.ui.CustomerActivity;
-import com.rudrashisdutta.thebank.ui.MainActivity;
 
 import java.util.List;
 
@@ -45,18 +43,24 @@ public class CustomersFragment extends Fragment {
 
     public static String EXTRA = "Customer-ID";
 
-    private final TextView supportActionBar;
+    private TextView supportActionBar;
     private ListView customerListView;
     private SwipeRefreshLayout refresh;
     private ToggleButton order;
-    private final Context context;
+    private Context context;
+
+    private static CustomersFragment customersFragment;
 
     private List<Customer> customers;
 
+    public CustomersFragment(){
+
+    }
     public CustomersFragment(TextView supportActionBar, Context context) {
         // Required empty public constructor
         this.supportActionBar = supportActionBar;
         this.context = context;
+        customersFragment = this;
     }
 
     /**
@@ -68,7 +72,7 @@ public class CustomersFragment extends Fragment {
      * @return A new instance of fragment CustomersFragment.
      */
     public static CustomersFragment newInstance(String param1, String param2, TextView supportActionBar, Context context) {
-        CustomersFragment fragment = new CustomersFragment(supportActionBar, context);
+        CustomersFragment fragment = new CustomersFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -103,6 +107,8 @@ public class CustomersFragment extends Fragment {
         initialize();
     }
     private void initialize(){
+        supportActionBar = (TextView) ViewPagerAdapter.getFragmentActivity().findViewById(R.id.toolBarActivityName);
+        context = ViewPagerAdapter.getFragmentActivity().getApplicationContext();
         supportActionBar.setText(R.string.customers);
         supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);
         customerListView = this.requireView().findViewById(R.id.list_of_customers);

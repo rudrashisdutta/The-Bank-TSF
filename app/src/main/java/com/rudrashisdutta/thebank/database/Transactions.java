@@ -3,7 +3,6 @@ package com.rudrashisdutta.thebank.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -77,9 +76,7 @@ public class Transactions extends Banking{
         return transactionAsString.toString();
     }
     private static void updateOrder(Context context){
-        Log.e("GETTING", "BUBNUN");
         ORDER = new Application(context).getTransactionsOrder();
-        Log.e("GETTING", ORDER);
     }
 
 

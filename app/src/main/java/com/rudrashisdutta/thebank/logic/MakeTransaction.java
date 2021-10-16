@@ -8,6 +8,7 @@ import com.rudrashisdutta.thebank.banking.Transaction;
 import com.rudrashisdutta.thebank.database.Customers;
 import com.rudrashisdutta.thebank.database.Transactions;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class MakeTransaction {
@@ -35,7 +36,9 @@ public class MakeTransaction {
             Customer sender = Customers.get(context, senderID);
             Customer receiver = Customers.get(context, receiverID);
             double senderNewBalance = sender.getBalance() - getTransaction().getAmount();
+            senderNewBalance = new BigDecimal(senderNewBalance).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
             double receiverNewBalance = receiver.getBalance() + getTransaction().getAmount();
+            receiverNewBalance = new BigDecimal(receiverNewBalance).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
             customers.updateBalance(sender, senderNewBalance);
             customers.updateBalance(receiver, receiverNewBalance);
             success = true;
@@ -54,7 +57,6 @@ public class MakeTransaction {
             if(transactionSuccessful){
                 updateBalance(getTransaction().getCustomerID(), getTransaction().getReceiverID());
             }
-            Log.e("XYZZZZZZ", Transactions.count(context)+"");
         } catch (Exception e){
             e.printStackTrace();
         }

@@ -31,7 +31,7 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
         this.resource = resource;
     }
 
-    static class TransactionListViewHolder{
+    public static class TransactionListViewHolder{
         TextView transactionID;
         TextView senderID_And_ReceiverID;
         TextView amount;

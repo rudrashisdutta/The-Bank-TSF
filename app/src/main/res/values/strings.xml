@@ -6,7 +6,7 @@
     <string name="account_id_textview_format">ACCOUNT ID: %s</string>
     <string name="balance_textview_format">₹ %s</string>
 
-    <string name="transaction_info">%s  ➡️ %s</string>
+    <string name="transaction_info">%s  ➟  %s</string>
     <string name="amount">₹ %s</string>
     <string name="date">%s</string>
 

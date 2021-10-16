@@ -2,11 +2,14 @@ package com.rudrashisdutta.thebank.ui.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -21,6 +24,8 @@ import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.database.Application;
 import com.rudrashisdutta.thebank.database.Customers;
 import com.rudrashisdutta.thebank.logic.CustomerAdapter;
+import com.rudrashisdutta.thebank.ui.CustomerActivity;
+import com.rudrashisdutta.thebank.ui.MainActivity;
 
 import java.util.List;
 
@@ -37,6 +42,8 @@ public class CustomersFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    public static String EXTRA = "Customer-ID";
 
     private final TextView supportActionBar;
     private ListView customerListView;
@@ -101,6 +108,20 @@ public class CustomersFragment extends Fragment {
         customerListView = this.requireView().findViewById(R.id.list_of_customers);
         refresh = this.requireView().findViewById(R.id.refresh_customers);
         order = this.requireView().findViewById(R.id.order_of_customers);
+        customerListView.setOnItemClickListener((adapterView, view, i, l) -> {
+            try{
+                Intent customerActivity = new Intent(context, CustomerActivity.class);
+                CustomerAdapter.CustomerListViewHolder viewHolder = (CustomerAdapter.CustomerListViewHolder) view.getTag();
+                long customerID;
+                String[] unformattedString = viewHolder.getAccountId().getText().toString().split(" ");
+                String IDAsString = unformattedString[unformattedString.length - 1];
+                customerID = Long.parseLong(IDAsString);
+                customerActivity.putExtra(EXTRA, customerID);
+                startActivity(customerActivity);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        });
         update();
         refresh.setOnRefreshListener(() -> {
             order.setChecked(getOrderButtonState());

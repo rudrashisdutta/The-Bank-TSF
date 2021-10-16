@@ -30,10 +30,22 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         this.resource = resource;
     }
 
-    static class CustomerListViewHolder{
+    public static class CustomerListViewHolder{
         TextView customerName;
         TextView accountId;
         TextView balance;
+
+        public TextView getCustomerName() {
+            return customerName;
+        }
+
+        public TextView getAccountId() {
+            return accountId;
+        }
+
+        public TextView getBalance() {
+            return balance;
+        }
     }
 
     @Override

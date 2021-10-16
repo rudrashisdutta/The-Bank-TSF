@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainActivity = ActivityMainBinding.inflate(getLayoutInflater());
         initialize();
     }
 
     public void initialize(){
+        mainActivity = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainActivity.getRoot());
         tabs = mainActivity.tabs;
         toolbar = mainActivity.toolBar;

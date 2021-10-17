@@ -16,15 +16,6 @@ public class MakeTransaction {
     private Context context;
 
     private Transaction transaction;
-    private long transactionTime;
-
-    private long getTransactionTime() {
-        return transactionTime;
-    }
-
-    private void setTransactionTime(long transactionTime) {
-        this.transactionTime = transactionTime;
-    }
 
     private Transaction getTransaction() {
         return transaction;

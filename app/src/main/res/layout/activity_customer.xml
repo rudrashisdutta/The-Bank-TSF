@@ -17,7 +17,300 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="20dp"
+        app:cardElevation="100dp">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/customer_activityID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="CUSTOMER ID"
+                    android:textAlignment="center"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/customer_activity_name_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:padding="5dp"
+                    android:text="NAME:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/customer_activityID" />
+
+                <TextView
+                    android:id="@+id/customer_activity_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="Name"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/customer_activity_name_tag"
+                    app:layout_constraintTop_toTopOf="@+id/customer_activity_name_tag" />
+
+                <TextView
+                    android:id="@+id/customer_activity_balance_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="BALANCE:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/customer_activity_name_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/customer_activity_name" />
+
+                <TextView
+                    android:id="@+id/customer_activity_balance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="Balance"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/customer_activity_balance_tag"
+                    app:layout_constraintTop_toTopOf="@+id/customer_activity_balance_tag" />
+
+                <TextView
+                    android:id="@+id/customer_activity_email_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="EMAIL:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/customer_activity_balance_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/customer_activity_balance" />
+
+                <TextView
+                    android:id="@+id/customer_activity_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="Email"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/customer_activity_email_tag"
+                    app:layout_constraintTop_toTopOf="@+id/customer_activity_email_tag" />
+
+                <TextView
+                    android:id="@+id/customer_activity_mob_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="MOBILE:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/customer_activity_email_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/customer_activity_email" />
+
+                <TextView
+                    android:id="@+id/customer_activity_mob"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="Mobile"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/customer_activity_mob_tag"
+                    app:layout_constraintTop_toTopOf="@+id/customer_activity_mob_tag" />
+
+                <TextView
+                    android:id="@+id/customer_activity_dob_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="DOB:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/customer_activity_mob_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/customer_activity_mob" />
+
+                <TextView
+                    android:id="@+id/customer_activity_dob"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="DOB"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/customer_activity_dob_tag"
+                    app:layout_constraintTop_toTopOf="@+id/customer_activity_dob_tag" />
+
+                <TextView
+                    android:id="@+id/customer_activity_pan_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="PAN:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/customer_activity_dob_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/customer_activity_dob" />
+
+                <TextView
+                    android:id="@+id/customer_activity_pan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="PAN"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/customer_activity_pan_tag"
+                    app:layout_constraintTop_toTopOf="@+id/customer_activity_pan_tag" />
+
+                <TextView
+                    android:id="@+id/customer_activity_aadhaar_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="AADHAAR:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/customer_activity_pan_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/customer_activity_pan" />
+
+                <TextView
+                    android:id="@+id/customer_activity_aadhaar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="Aadhaar"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/customer_activity_aadhaar_tag"
+                    app:layout_constraintTop_toTopOf="@+id/customer_activity_aadhaar_tag" />
+
+                <TextView
+                    android:id="@+id/customer_activity_address_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="ADDRESS:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/customer_activity_aadhaar_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/customer_activity_aadhaar" />
+
+                <TextView
+                    android:id="@+id/customer_activity_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="Aadhaar"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/customer_activity_address_tag"
+                    app:layout_constraintTop_toTopOf="@+id/customer_activity_address_tag" />
+
+                <Button
+                    android:id="@+id/customer_activity_pay_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_pay_btn"
+                    android:elevation="100dp"
+                    android:fontFamily="monospace"
+                    android:text="Pay"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_2"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/customer_activity_address" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

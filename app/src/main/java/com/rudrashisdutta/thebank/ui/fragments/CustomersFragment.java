@@ -107,7 +107,7 @@ public class CustomersFragment extends Fragment {
         initialize();
     }
     private void initialize(){
-        supportActionBar = (TextView) ViewPagerAdapter.getFragmentActivity().findViewById(R.id.toolBarActivityName);
+        supportActionBar = ViewPagerAdapter.getFragmentActivity().findViewById(R.id.toolBarActivityName);
         context = ViewPagerAdapter.getFragmentActivity().getApplicationContext();
         supportActionBar.setText(R.string.customers);
         supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);

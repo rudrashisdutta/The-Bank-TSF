@@ -28,7 +28,7 @@ public class Customer {
     private static final List<Customer> defaultCustomers = new ArrayList<Customer>(){
         {
             add(Customer.build(100291, "Rudrashis Kumar Dutta", getDate("2001-08-25"), "1906354@kiit.ac.in", "1234239078", "JHV2819Q123", "516273839483", 50000.10, "BK Road, Cuttack, Odisha"));
-            add(Customer.build(100292, "Pooja Agarwal", getDate("2001-11-28"), "1905330@kiit.ac.in", "8374628472", "ABH4318J909", "516221232345", 50000.10, "Kargil Road, Bhubaneswar, Odisha"));
+            add(Customer.build(100292, "Akira", getDate("2001-11-28"), "1905330@kiit.ac.in", "8374628472", "ABH4318J909", "516221232345", 50000.10, "Kargil Road, Bhubaneswar, Odisha"));
             add(Customer.build(100293, "Rajesh Kumar", getDate("1995-12-05"), "rjk.95@gmail.com", "7878635472", "QER4334D455", "516726350918", 50000.10, "Buxi Bazar, Cuttack, Odisha"));
             add(Customer.build(100294, "Suresh Kumar", getDate("1959-05-12"), "sur.k@gmail.com", "2785477863", "ERQ4345534D", "516721982647", 50000.10, "Badambadi, Cuttack, Odisha"));
             add(Customer.build(100295, "R. Ashok", getDate("1992-09-30"), "ashok.r@gmail.com", "1247727863", "WEE55RQ434D", "578147262619", 50000.10, "Dolmundai, Cuttack, Odisha"));

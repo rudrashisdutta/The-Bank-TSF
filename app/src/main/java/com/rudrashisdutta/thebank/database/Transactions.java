@@ -91,7 +91,7 @@ public class Transactions extends Banking{
             transactions = new LinkedHashMap<>();
             try(Cursor cursor = database.rawQuery("select * from " + TABLE + " ORDER BY " + columnNames.get(columnNames.size() - 2) + " " + ORDER + ";", null)){
                 while(cursor.moveToNext()){
-                    transactions.put(cursor.getString(0), Transaction.build(cursor.getString(0), cursor.getLong(1), cursor.getLong(2), cursor.getLong(3), cursor.getDouble(4)));
+                    transactions.put(cursor.getString(0), Transaction.build(context, cursor.getString(0), cursor.getLong(1), cursor.getLong(2), cursor.getLong(3), cursor.getDouble(4)));
                 }
             }
         } catch (Exception e){

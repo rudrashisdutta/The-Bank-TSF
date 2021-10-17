@@ -36,6 +36,10 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
         TextView senderID_And_ReceiverID;
         TextView amount;
         TextView date;
+
+        public TextView getTransactionID() {
+            return transactionID;
+        }
     }
 
     @Override

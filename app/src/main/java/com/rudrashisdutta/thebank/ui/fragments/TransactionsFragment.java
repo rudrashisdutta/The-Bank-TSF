@@ -2,11 +2,13 @@ package com.rudrashisdutta.thebank.ui.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -15,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.rudrashisdutta.thebank.R;
+import com.rudrashisdutta.thebank.ui.TransactionActivity;
 import com.rudrashisdutta.thebank.banking.Transaction;
 import com.rudrashisdutta.thebank.database.Application;
 import com.rudrashisdutta.thebank.database.Transactions;
@@ -36,6 +39,8 @@ public class TransactionsFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    public static String EXTRA = "Transaction-ID";
 
     private TextView supportActionBar;
     private ListView transactionListView;
@@ -95,13 +100,22 @@ public class TransactionsFragment extends Fragment {
         initialize();
     }
     private void initialize(){
-        supportActionBar = (TextView) ViewPagerAdapter.getFragmentActivity().findViewById(R.id.toolBarActivityName);
+        supportActionBar = ViewPagerAdapter.getFragmentActivity().findViewById(R.id.toolBarActivityName);
         context = ViewPagerAdapter.getFragmentActivity().getApplicationContext();
         supportActionBar.setText(R.string.transactions);
         supportActionBar.setGravity(Gravity.CENTER_HORIZONTAL);
         transactionListView = this.requireView().findViewById(R.id.list_of_transactions);
         refresh = this.requireView().findViewById(R.id.refresh_transactions);
         order = this.requireView().findViewById(R.id.order_of_transactions);
+        transactionListView.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent transactionActivity = new Intent(context, TransactionActivity.class);
+            TransactionAdapter.TransactionListViewHolder viewHolder = (TransactionAdapter.TransactionListViewHolder)view.getTag();
+            String transactionID;
+            String[] unformattedString = viewHolder.getTransactionID().getText().toString().split(" ");
+            transactionID = unformattedString[unformattedString.length - 1];
+            transactionActivity.putExtra(EXTRA, transactionID);
+            startActivity(transactionActivity);
+        });
         update();
         refresh.setOnRefreshListener(() -> {
             order.setChecked(getOrderButtonState());

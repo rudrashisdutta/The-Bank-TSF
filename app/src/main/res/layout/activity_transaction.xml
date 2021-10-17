@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.TransactionActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="100dp">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/transaction_activityID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="TRANSACTION ID"
+                    android:textAlignment="center"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_senderID_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:padding="5dp"
+                    android:text="SENDER ID:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/transaction_activityID" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_senderID"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="Sender ID"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/transaction_activity_senderID_tag"
+                    app:layout_constraintTop_toTopOf="@+id/transaction_activity_senderID_tag" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_sender_name_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="SENDER:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/transaction_activity_senderID_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/transaction_activity_senderID" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_sender_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="Sender Name"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/transaction_activity_sender_name_tag"
+                    app:layout_constraintTop_toTopOf="@+id/transaction_activity_sender_name_tag" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_receiver_ID_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="RECEIVER ID:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/transaction_activity_sender_name_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/transaction_activity_sender_name" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_receiver_ID"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="Receiver ID"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/transaction_activity_receiver_ID_tag"
+                    app:layout_constraintTop_toTopOf="@+id/transaction_activity_receiver_ID_tag" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_receiver_name_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="RECEIVER:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/transaction_activity_receiver_ID_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/transaction_activity_receiver_ID" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_receiver_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="Receiver Name"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/transaction_activity_receiver_name_tag"
+                    app:layout_constraintTop_toTopOf="@+id/transaction_activity_receiver_name_tag" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_time_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="TRANSACTION TIME:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/transaction_activity_receiver_name_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/transaction_activity_receiver_name" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="time"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/transaction_activity_time_tag"
+                    app:layout_constraintTop_toTopOf="@+id/transaction_activity_time_tag" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_amount_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:text="AMOUNT:"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/transaction_activity_time_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/transaction_activity_time" />
+
+                <TextView
+                    android:id="@+id/transaction_activity_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:text="Amount"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/base_theme_1"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/transaction_activity_amount_tag"
+                    app:layout_constraintTop_toTopOf="@+id/transaction_activity_amount_tag" />
+
+                <Button
+                    android:id="@+id/customer_activity_repay_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_pay_btn"
+                    android:elevation="100dp"
+                    android:fontFamily="monospace"
+                    android:text="Re-Pay"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/base_theme_2"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/transaction_activity_amount" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

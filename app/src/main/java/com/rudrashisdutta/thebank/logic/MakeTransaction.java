@@ -61,7 +61,7 @@ public class MakeTransaction {
 
     public static MakeTransaction build(Customer sender, Customer receiver, double amount, Context context){
         MakeTransaction makeTransaction = new MakeTransaction();
-        Transaction transaction = Transaction.build("", sender.getCustomerID(), receiver.getCustomerID(), 0, amount);
+        Transaction transaction = Transaction.build(context, "", sender.getCustomerID(), receiver.getCustomerID(), 0, amount);
         makeTransaction.setTransaction(transaction);
         makeTransaction.context = context;
         return makeTransaction;

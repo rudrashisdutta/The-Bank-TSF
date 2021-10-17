@@ -7,6 +7,8 @@ import com.rudrashisdutta.thebank.database.Transactions;
 
 public class Transaction {
 
+    private Context context;
+
     private String transactionID = null;
     private long customerID = -1;
     private long receiverID = -1;
@@ -14,6 +16,30 @@ public class Transaction {
     private double amount = -1;
 
     private Transactions transactions;
+
+    private Customer customer;
+    private Customer receiver;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+    private void setCustomer() {
+        try{
+            customer = Customers.get(context, getCustomerID());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public Customer getReceiver() {
+        return receiver;
+    }
+    private void setReceiver() {
+        try{
+            receiver = Customers.get(context, getReceiverID());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public String getTransactionID() {
         return transactionID;
@@ -55,13 +81,16 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public static Transaction build(String transactionID, long customerID, long receiverID, long transactionTime, double amount){
+    public static Transaction build(Context context, String transactionID, long customerID, long receiverID, long transactionTime, double amount){
         Transaction transaction = new Transaction();
         transaction.setTransactionID(transactionID);
         transaction.setCustomerID(customerID);
         transaction.setReceiverID(receiverID);
         transaction.setTransactionTime(transactionTime);
         transaction.setAmount(amount);
+        transaction.context = context;
+        transaction.setCustomer();
+        transaction.setReceiver();
         return transaction;
     }
     public static Transaction build(String transactionID, long customerID, long receiverID, double amount){

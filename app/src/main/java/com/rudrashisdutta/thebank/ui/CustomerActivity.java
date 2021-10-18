@@ -3,13 +3,17 @@ package com.rudrashisdutta.thebank.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.rudrashisdutta.thebank.PaymentActivity;
 import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.database.Customers;
 import com.rudrashisdutta.thebank.databinding.ActivityCustomerBinding;
+import com.rudrashisdutta.thebank.logic.MakeTransaction;
 import com.rudrashisdutta.thebank.ui.fragments.CustomersFragment;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +34,8 @@ public class CustomerActivity extends AppCompatActivity {
     private TextView aadhaar;
     private TextView address;
 
+    private Button pay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +48,12 @@ public class CustomerActivity extends AppCompatActivity {
         getValidCustomer();
         setupView();
         setupViewsWithData();
+        pay.setOnClickListener(view -> {
+            Intent paymentActivity = new Intent(this, PaymentActivity.class);
+            paymentActivity.putExtra(MakeTransaction.PAYMENT_MODE, MakeTransaction.PAY);
+            paymentActivity.putExtra(MakeTransaction.ID, customer.getCustomerID());
+            startActivity(paymentActivity);
+        });
     }
     private void setupView(){
         ID = customerActivity.customerActivityID;
@@ -53,6 +65,8 @@ public class CustomerActivity extends AppCompatActivity {
         pan = customerActivity.customerActivityPan;
         aadhaar = customerActivity.customerActivityAadhaar;
         address = customerActivity.customerActivityAddress;
+
+        pay = customerActivity.customerActivityPayBtn;
     }
     private void setupViewsWithData(){
         ID.setText(String.valueOf(customer.getCustomerID()));

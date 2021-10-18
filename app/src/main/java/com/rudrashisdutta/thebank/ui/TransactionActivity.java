@@ -3,13 +3,16 @@ package com.rudrashisdutta.thebank.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.rudrashisdutta.thebank.PaymentActivity;
 import com.rudrashisdutta.thebank.banking.Transaction;
 import com.rudrashisdutta.thebank.database.Transactions;
 import com.rudrashisdutta.thebank.databinding.ActivityTransactionBinding;
+import com.rudrashisdutta.thebank.logic.MakeTransaction;
 import com.rudrashisdutta.thebank.ui.fragments.TransactionsFragment;
 
 import java.text.SimpleDateFormat;
@@ -28,6 +31,8 @@ public class TransactionActivity extends AppCompatActivity {
     private TextView time;
     private TextView amount;
 
+    private Button repay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,13 @@ public class TransactionActivity extends AppCompatActivity {
         getValidTransaction();
         setupView();
         setupViewsWithData();
+        repay.setOnClickListener(view -> {
+            //TODO: Balance Check
+            Intent paymentActivity = new Intent(this, PaymentActivity.class);
+            paymentActivity.putExtra(MakeTransaction.PAYMENT_MODE, MakeTransaction.REPAY);
+            paymentActivity.putExtra(MakeTransaction.ID, transaction.getTransactionID());
+            startActivity(paymentActivity);
+        });
     }
     private void setupView(){
         ID = transactionActivity.transactionActivityID;
@@ -48,6 +60,8 @@ public class TransactionActivity extends AppCompatActivity {
         receiverName = transactionActivity.transactionActivityReceiverName;
         time = transactionActivity.transactionActivityTime;
         amount = transactionActivity.transactionActivityAmount;
+
+        repay = transactionActivity.customerActivityRepayBtn;
     }
     private void setupViewsWithData(){
         ID.setText(transaction.getTransactionID());

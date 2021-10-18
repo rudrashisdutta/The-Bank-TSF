@@ -6,6 +6,7 @@ import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.banking.Transaction;
 import com.rudrashisdutta.thebank.database.Customers;
 import com.rudrashisdutta.thebank.database.Transactions;
+import com.rudrashisdutta.thebank.ui.fragments.CustomersFragment;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,6 +14,12 @@ import java.util.Date;
 public class MakeTransaction {
 
     private Context context;
+
+    public static String PAYMENT_MODE = "MODE";
+    public static String PAY = "PAY";
+    public static String REPAY = "RE-PAY";
+
+    public static String ID = CustomersFragment.EXTRA;
 
     private Transaction transaction;
 

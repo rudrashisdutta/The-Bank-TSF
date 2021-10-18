@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentActivity"
+    android:animateLayoutChanges="true">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/payment_activity_toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/bg_supportactionbar"
+        app:subtitleTextColor="@color/base_theme_2"
+        android:paddingHorizontal="15dp">
+
+        <TextView
+            android:id="@+id/payment_activity_customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Customer Name"
+            android:textAlignment="center"
+            android:textColor="@color/base_theme_2"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="164dp"
+            tools:layout_editor_absoluteY="15dp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/payment_activity_payment_options"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/payment_activity_toolBar"
+        android:animateLayoutChanges="true"
+        android:visibility="gone">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/payment_activity_refresh_customer_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:visibility="gone">
+
+            <ListView
+                android:id="@+id/payment_activity_customer_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/payment_activity_amount_selection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone">
+
+
+            <TextView
+                android:id="@+id/payment_activity_amount_receiver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Receiver Name"
+                android:textAlignment="center"
+                android:textColor="@color/base_theme_1"
+                android:textColorHint="@color/base_theme_1"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/payment_activity_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:hint="Enter the amount..."
+                android:textAlignment="center"
+                android:textColor="@color/base_theme_1"
+                android:textColorHint="@color/base_theme_1"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/payment_activity_amount_receiver" />
+
+<!--            1 2 3-->
+            <Button
+                android:id="@+id/payment_activity_amount_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="1"
+                android:tag="1"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintEnd_toStartOf="@id/payment_activity_amount_2"
+                app:layout_constraintTop_toTopOf="@+id/payment_activity_amount_2" />
+
+            <Button
+                android:id="@+id/payment_activity_amount_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="2"
+                android:tag="2"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintEnd_toEndOf="@id/payment_activity_amount"
+                app:layout_constraintStart_toStartOf="@+id/payment_activity_amount"
+                app:layout_constraintTop_toBottomOf="@+id/payment_activity_amount" />
+            <Button
+                android:id="@+id/payment_activity_amount_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="3"
+                android:tag="3"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintStart_toEndOf="@id/payment_activity_amount_2"
+                app:layout_constraintTop_toTopOf="@+id/payment_activity_amount_2" />
+
+<!--            4 5 6-->
+            <Button
+                android:id="@+id/payment_activity_amount_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="4"
+                android:tag="4"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintEnd_toStartOf="@id/payment_activity_amount_5"
+                app:layout_constraintTop_toTopOf="@+id/payment_activity_amount_5" />
+
+            <Button
+                android:id="@+id/payment_activity_amount_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="5"
+                android:tag="5"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintEnd_toEndOf="@id/payment_activity_amount_2"
+                app:layout_constraintStart_toStartOf="@+id/payment_activity_amount_2"
+                app:layout_constraintTop_toBottomOf="@+id/payment_activity_amount_2" />
+            <Button
+                android:id="@+id/payment_activity_amount_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="6"
+                android:tag="6"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintStart_toEndOf="@id/payment_activity_amount_5"
+                app:layout_constraintTop_toTopOf="@+id/payment_activity_amount_5" />
+
+<!--            7 8 9-->
+            <Button
+                android:id="@+id/payment_activity_amount_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="7"
+                android:tag="7"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintEnd_toStartOf="@id/payment_activity_amount_8"
+                app:layout_constraintTop_toTopOf="@+id/payment_activity_amount_8" />
+
+            <Button
+                android:id="@+id/payment_activity_amount_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="8"
+                android:tag="8"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintEnd_toEndOf="@id/payment_activity_amount_5"
+                app:layout_constraintStart_toStartOf="@+id/payment_activity_amount_5"
+                app:layout_constraintTop_toBottomOf="@+id/payment_activity_amount_5" />
+            <Button
+                android:id="@+id/payment_activity_amount_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="9"
+                android:tag="9"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintStart_toEndOf="@id/payment_activity_amount_8"
+                app:layout_constraintTop_toTopOf="@+id/payment_activity_amount_8" />
+
+<!--            return 0 dot-->
+            <Button
+                android:id="@+id/payment_activity_amount_backspace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="⌫"
+                android:tag="10"
+                android:textAlignment="center"
+                android:textSize="35sp"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintEnd_toStartOf="@id/payment_activity_amount_0"
+                app:layout_constraintTop_toTopOf="@+id/payment_activity_amount_0" />
+
+            <Button
+                android:id="@+id/payment_activity_amount_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="0"
+                android:tag="0"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintEnd_toEndOf="@id/payment_activity_amount_8"
+                app:layout_constraintStart_toStartOf="@+id/payment_activity_amount_8"
+                app:layout_constraintTop_toBottomOf="@+id/payment_activity_amount_8" />
+            <Button
+                android:id="@+id/payment_activity_amount_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="."
+                android:tag="11"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/base_theme_2"
+                android:background="@drawable/bg_amount_entry_btns"
+                app:layout_constraintStart_toEndOf="@id/payment_activity_amount_0"
+                app:layout_constraintTop_toTopOf="@+id/payment_activity_amount_0" />
+
+
+            <Button
+                android:id="@+id/payment_activity_amount_return"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_pay_btn"
+                android:elevation="100dp"
+                android:fontFamily="monospace"
+                android:text="Return"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/base_theme_2"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payment_activity_amount_0" />
+            <Button
+                android:id="@+id/payment_activity_amount_continue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_pay_btn"
+                android:elevation="100dp"
+                android:fontFamily="monospace"
+                android:text="Continue"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/base_theme_2"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payment_activity_amount_return" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/payment_activity_payment_confirmation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/payment_activity_toolBar">
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

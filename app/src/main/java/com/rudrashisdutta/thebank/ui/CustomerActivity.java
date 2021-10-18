@@ -1,18 +1,19 @@
 package com.rudrashisdutta.thebank.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.database.Customers;
 import com.rudrashisdutta.thebank.databinding.ActivityCustomerBinding;
 import com.rudrashisdutta.thebank.ui.fragments.CustomersFragment;
 
-import java.time.Instant;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CustomerActivity extends AppCompatActivity {
 
@@ -60,7 +61,9 @@ public class CustomerActivity extends AppCompatActivity {
         email.setText(customer.getEmail());
         mob.setText(customer.getMobileNumber());
         long dobInLong = Long.parseLong(customer.getDOB());
-        dob.setText(Instant.ofEpochMilli(dobInLong).toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String date = dateFormat.format(new Date(dobInLong));
+        dob.setText(date);
         pan.setText(customer.getPAN());
         aadhaar.setText(customer.getAadhaar());
         address.setText(customer.getAddress());

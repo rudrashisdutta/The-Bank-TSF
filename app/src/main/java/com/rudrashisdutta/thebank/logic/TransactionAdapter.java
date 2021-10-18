@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import com.rudrashisdutta.thebank.R;
 import com.rudrashisdutta.thebank.banking.Transaction;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -71,7 +72,9 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
         transactionListViewHolder.senderID_And_ReceiverID.setText(String.format(context.getString(R.string.transaction_info), transactions.get(position).getCustomerID(), transactions.get(position).getReceiverID()));
         transactionListViewHolder.amount.setText(String.format(context.getString(R.string.balance_textview_format), transactions.get(position).getAmount()));
         Date date = new Date(transactions.get(position).getTransactionTime());
-        transactionListViewHolder.date.setText(String.format(context.getString(R.string.date), date.toString()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy, HH:mm:ss.SSS");
+        String dateAsString = dateFormat.format(date);
+        transactionListViewHolder.date.setText(String.format(context.getString(R.string.date), dateAsString));
         return list_item;
     }
 

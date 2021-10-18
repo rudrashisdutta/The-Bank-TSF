@@ -1,7 +1,6 @@
 package com.rudrashisdutta.thebank.logic;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.banking.Transaction;

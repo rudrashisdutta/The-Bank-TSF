@@ -8,7 +8,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -17,12 +16,12 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.rudrashisdutta.thebank.R;
-import com.rudrashisdutta.thebank.ui.TransactionActivity;
 import com.rudrashisdutta.thebank.banking.Transaction;
 import com.rudrashisdutta.thebank.database.Application;
 import com.rudrashisdutta.thebank.database.Transactions;
 import com.rudrashisdutta.thebank.logic.TransactionAdapter;
 import com.rudrashisdutta.thebank.logic.ViewPagerAdapter;
+import com.rudrashisdutta.thebank.ui.TransactionActivity;
 
 import java.util.List;
 

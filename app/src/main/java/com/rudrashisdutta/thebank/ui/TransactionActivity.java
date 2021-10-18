@@ -1,14 +1,19 @@
 package com.rudrashisdutta.thebank.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
-import com.rudrashisdutta.thebank.R;
-import com.rudrashisdutta.thebank.banking.Customer;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.rudrashisdutta.thebank.banking.Transaction;
+import com.rudrashisdutta.thebank.database.Transactions;
 import com.rudrashisdutta.thebank.databinding.ActivityTransactionBinding;
+import com.rudrashisdutta.thebank.ui.fragments.TransactionsFragment;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TransactionActivity extends AppCompatActivity {
 
@@ -31,5 +36,36 @@ public class TransactionActivity extends AppCompatActivity {
     private void initialize(){
         transactionActivity = ActivityTransactionBinding.inflate(getLayoutInflater());
         setContentView(transactionActivity.getRoot());
+        getValidTransaction();
+        setupView();
+        setupViewsWithData();
+    }
+    private void setupView(){
+        ID = transactionActivity.transactionActivityID;
+        senderID = transactionActivity.transactionActivitySenderID;
+        senderName = transactionActivity.transactionActivitySenderName;
+        receiverID = transactionActivity.transactionActivityReceiverID;
+        receiverName = transactionActivity.transactionActivityReceiverName;
+        time = transactionActivity.transactionActivityTime;
+        amount = transactionActivity.transactionActivityAmount;
+    }
+    private void setupViewsWithData(){
+        ID.setText(transaction.getTransactionID());
+        senderID.setText(String.valueOf(transaction.getCustomerID()));
+        senderName.setText(transaction.getCustomer().getCustomerName());
+        receiverID.setText(String.valueOf(transaction.getReceiverID()));
+        receiverName.setText(transaction.getReceiver().getCustomerName());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy, HH:mm:ss.SSS");
+        String date = dateFormat.format(new Date(transaction.getTransactionTime()));
+        time.setText(date);
+        amount.setText(String.valueOf(transaction.getAmount()));
+    }
+    private void getValidTransaction(){
+        Intent intent = getIntent();
+        String transactionID = intent.getStringExtra(TransactionsFragment.EXTRA);
+        if(transactionID != null){
+            transaction = Transactions.get(this, transactionID);
+            Log.e("qwerty", transaction.getCustomer().getCustomerName());
+        }
     }
 }

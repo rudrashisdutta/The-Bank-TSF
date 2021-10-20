@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PaymentActivity"
+    tools:context=".ui.PaymentActivity"
     android:animateLayoutChanges="true">
 
 
@@ -47,19 +47,49 @@
         android:animateLayoutChanges="true"
         android:visibility="gone">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/payment_activity_refresh_customer_list"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/payment_activity_customer_selection_screen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:animateLayoutChanges="true"
-            android:visibility="gone">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ListView
-                android:id="@+id/payment_activity_customer_list"
+            <TextView
+                android:id="@+id/payment_activity_choose_customer_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="monospace"
+                android:text="Choose a customer to pay to..."
+                android:textAlignment="center"
+                android:textColor="@color/base_theme_1"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/payment_activity_refresh_customer_list"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"/>
+                android:layout_height="0dp"
+                android:animateLayoutChanges="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payment_activity_choose_customer_tag">
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <ListView
+                    android:id="@+id/payment_activity_customer_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/payment_activity_amount_selection"
@@ -68,7 +98,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/payment_activity_customer_selection_screen"
             android:visibility="gone">
 
 
@@ -343,6 +373,152 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/payment_activity_toolBar">
 
+        <TextView
+            android:id="@+id/payment_activity_payment_confirmation_receiver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Receiver Name"
+            android:textAlignment="center"
+            android:textColor="@color/base_theme_1"
+            android:textColorHint="@color/base_theme_1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/payment_activity_payment_confirmation_senderID_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:padding="5dp"
+            android:text="SENDER ID:"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/base_theme_1"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/payment_activity_payment_confirmation_receiver" />
+
+        <TextView
+            android:id="@+id/payment_activity_payment_confirmation_senderID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:padding="5dp"
+            android:text="Sender ID"
+            android:textAlignment="viewStart"
+            android:textColor="@color/base_theme_1"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/payment_activity_payment_confirmation_senderID_tag"
+            app:layout_constraintTop_toTopOf="@+id/payment_activity_payment_confirmation_senderID_tag" />
+
+        <TextView
+            android:id="@+id/payment_activity_payment_confirmation_receiverID_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="5dp"
+            android:text="RECEIVER ID:"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/base_theme_1"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/payment_activity_payment_confirmation_senderID_tag"
+            app:layout_constraintTop_toBottomOf="@+id/payment_activity_payment_confirmation_senderID" />
+
+        <TextView
+            android:id="@+id/payment_activity_payment_confirmation_receiverID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:padding="5dp"
+            android:text="Receiver ID"
+            android:textAlignment="viewStart"
+            android:textColor="@color/base_theme_1"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/payment_activity_payment_confirmation_receiverID_tag"
+            app:layout_constraintTop_toTopOf="@+id/payment_activity_payment_confirmation_receiverID_tag" />
+
+        <TextView
+            android:id="@+id/payment_activity_payment_confirmation_amount_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="5dp"
+            android:text="AMOUNT:"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/base_theme_1"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/payment_activity_payment_confirmation_receiverID_tag"
+            app:layout_constraintTop_toBottomOf="@+id/payment_activity_payment_confirmation_receiverID" />
+
+        <TextView
+            android:id="@+id/payment_activity_payment_confirmation_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:padding="5dp"
+            android:text="Amount"
+            android:textAlignment="viewStart"
+            android:textColor="@color/base_theme_1"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/payment_activity_payment_confirmation_amount_tag"
+            app:layout_constraintTop_toTopOf="@+id/payment_activity_payment_confirmation_amount_tag" />
+
+        <Button
+            android:id="@+id/payment_activity_payment_confirmation_change_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_pay_btn"
+            android:elevation="100dp"
+            android:fontFamily="monospace"
+            android:text="Change Amount"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/base_theme_2"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/payment_activity_payment_confirmation_amount" />
+        <Button
+            android:id="@+id/payment_activity_payment_confirmation_pay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_pay_btn"
+            android:elevation="100dp"
+            android:fontFamily="monospace"
+            android:text="Pay"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/base_theme_2"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

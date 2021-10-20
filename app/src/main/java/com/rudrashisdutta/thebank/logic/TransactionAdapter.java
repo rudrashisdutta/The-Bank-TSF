@@ -34,7 +34,7 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
 
     public static class TransactionListViewHolder{
         TextView transactionID;
-        TextView senderID_And_ReceiverID;
+        TextView senderName_And_ReceiverName;
         TextView amount;
         TextView date;
 
@@ -63,13 +63,13 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
         TransactionListViewHolder transactionListViewHolder = new TransactionListViewHolder();
         View list_item = inflater.inflate(resource, parent, false);
         transactionListViewHolder.transactionID = Objects.requireNonNull(list_item).findViewById(R.id.transactionID);
-        transactionListViewHolder.senderID_And_ReceiverID = Objects.requireNonNull(list_item).findViewById(R.id.transactionInfo);
+        transactionListViewHolder.senderName_And_ReceiverName = Objects.requireNonNull(list_item).findViewById(R.id.transactionInfo);
         transactionListViewHolder.amount = Objects.requireNonNull(list_item).findViewById(R.id.amount);
         transactionListViewHolder.date = Objects.requireNonNull(list_item).findViewById(R.id.date);
 
         list_item.setTag(transactionListViewHolder);
         transactionListViewHolder.transactionID.setText(transactions.get(position).getTransactionID());
-        transactionListViewHolder.senderID_And_ReceiverID.setText(String.format(context.getString(R.string.transaction_info), transactions.get(position).getCustomerID(), transactions.get(position).getReceiverID()));
+        transactionListViewHolder.senderName_And_ReceiverName.setText(String.format(context.getString(R.string.transaction_info), transactions.get(position).getCustomer().getCustomerName(), transactions.get(position).getReceiver().getCustomerName()));
         transactionListViewHolder.amount.setText(String.format(context.getString(R.string.balance_textview_format), transactions.get(position).getAmount()));
         Date date = new Date(transactions.get(position).getTransactionTime());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy, HH:mm:ss.SSS");

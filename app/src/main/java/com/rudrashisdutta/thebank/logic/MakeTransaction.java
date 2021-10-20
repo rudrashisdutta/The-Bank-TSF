@@ -19,7 +19,7 @@ public class MakeTransaction {
     public static String PAY = "PAY";
     public static String REPAY = "RE-PAY";
 
-    public static String ID = CustomersFragment.EXTRA;
+    public static String ID = "ID";
 
     private Transaction transaction;
 
@@ -45,19 +45,23 @@ public class MakeTransaction {
         return success;
     }
 
-    public Transaction make(){
-        try {
-            Transactions transactions = new Transactions(context);
-            Date dateTimeNow = new Date();
-            Transaction.build(context, transaction, dateTimeNow.getTime());
-            boolean transactionSuccessful = transactions.store(getTransaction());
-            if(transactionSuccessful){
-                updateBalance(getTransaction().getCustomerID(), getTransaction().getReceiverID());
+    public boolean make(){
+        boolean success = false;
+        if(getTransaction().getAmount() <= getTransaction().getCustomer().getBalance()) {
+            try {
+                Transactions transactions = new Transactions(context);
+                Date dateTimeNow = new Date();
+                Transaction.build(context, transaction, dateTimeNow.getTime());
+                boolean transactionSuccessful = transactions.store(getTransaction());
+                if (transactionSuccessful) {
+                    updateBalance(getTransaction().getCustomerID(), getTransaction().getReceiverID());
+                }
+                success = true;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e){
-            e.printStackTrace();
         }
-        return getTransaction();
+        return success;
     }
 
     private void setTransaction(Transaction transaction) {

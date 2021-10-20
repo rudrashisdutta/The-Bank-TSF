@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheBank">
         <activity
-            android:name=".PaymentActivity"
+            android:name=".ui.TransactionResult"
+            android:exported="false" />
+        <activity
+            android:name=".ui.PaymentActivity"
             android:exported="false" />
         <activity
             android:name=".ui.TransactionActivity"

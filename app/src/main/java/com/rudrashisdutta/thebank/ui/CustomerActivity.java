@@ -3,13 +3,11 @@ package com.rudrashisdutta.thebank.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.rudrashisdutta.thebank.PaymentActivity;
 import com.rudrashisdutta.thebank.banking.Customer;
 import com.rudrashisdutta.thebank.database.Customers;
 import com.rudrashisdutta.thebank.databinding.ActivityCustomerBinding;
@@ -42,12 +40,16 @@ public class CustomerActivity extends AppCompatActivity {
         initialize();
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        update();
+    }
+
     private void initialize(){
         customerActivity = ActivityCustomerBinding.inflate(getLayoutInflater());
         setContentView(customerActivity.getRoot());
-        getValidCustomer();
-        setupView();
-        setupViewsWithData();
+        update();
         pay.setOnClickListener(view -> {
             Intent paymentActivity = new Intent(this, PaymentActivity.class);
             paymentActivity.putExtra(MakeTransaction.PAYMENT_MODE, MakeTransaction.PAY);
@@ -67,6 +69,11 @@ public class CustomerActivity extends AppCompatActivity {
         address = customerActivity.customerActivityAddress;
 
         pay = customerActivity.customerActivityPayBtn;
+    }
+    private void update(){
+        getValidCustomer();
+        setupView();
+        setupViewsWithData();
     }
     private void setupViewsWithData(){
         ID.setText(String.valueOf(customer.getCustomerID()));

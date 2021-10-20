@@ -9,5 +9,6 @@
     <string name="transaction_info">%s  ➟  %s</string>
     <string name="amount">₹ %s</string>
     <string name="date">%s</string>
+    <string name="receiver_name_format">TO: %s</string>
 
 </resources>

@@ -10,5 +10,7 @@
     <string name="amount">₹ %s</string>
     <string name="date">%s</string>
     <string name="receiver_name_format">TO: %s</string>
+    <string name="transaction_successfull">TRANSACTION SUCCESSFULL</string>
+    <string name="transaction_failed">TRANSACTION FAILED</string>
 
 </resources>

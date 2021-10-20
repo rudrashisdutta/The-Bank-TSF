@@ -1,13 +1,13 @@
 package com.rudrashisdutta.thebank.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
 
-import com.rudrashisdutta.thebank.databinding.ActivityTransactionBinding;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.rudrashisdutta.thebank.R;
 import com.rudrashisdutta.thebank.databinding.ActivityTransactionResultBinding;
 
 public class TransactionResult extends AppCompatActivity {
@@ -32,9 +32,9 @@ public class TransactionResult extends AppCompatActivity {
         String result = intent.getStringExtra(EXTRA);
         transactionResultView = transactionResult.transactionResultView;
         if(result.equals(SUCCESS)){
-            transactionResultView.setText("TRANSACTION SUCCESSFULL");
+            transactionResultView.setText(R.string.transaction_successfull);
         } else{
-            transactionResultView.setText("TRANSACTION FAILED");
+            transactionResultView.setText(R.string.transaction_failed);
         }
         transactionResultView.setScaleX(0);
         transactionResultView.setScaleY(0);

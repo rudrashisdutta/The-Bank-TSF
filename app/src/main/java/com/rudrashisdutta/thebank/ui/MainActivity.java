@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
         new Thread(() -> Application.createDataIfNotFound(MainActivity.this)).start();
         mainScreen = mainActivity.mainScreen;
-        mainScreenAdapter = new ViewPagerAdapter(this, activityNameOnSupportActionBar, this);
+        mainScreenAdapter = new ViewPagerAdapter(this);
         mainScreen.setAdapter(mainScreenAdapter);
         new TabLayoutMediator(tabs, mainScreen, (tab, position) -> {
             if(position == 0){

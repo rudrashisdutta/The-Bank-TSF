@@ -20,9 +20,8 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     private TextView supportActionBar;
     private static FragmentActivity fragmentActivity;
 
-    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, TextView supportActionBar, Context context) {
+    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
-        this.supportActionBar = supportActionBar;
         ViewPagerAdapter.fragmentActivity = fragmentActivity;
         fragments = new ArrayList<Fragment>(){
             {

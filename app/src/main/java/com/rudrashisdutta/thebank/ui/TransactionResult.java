@@ -32,7 +32,7 @@ public class TransactionResult extends AppCompatActivity {
         String result = intent.getStringExtra(EXTRA);
         transactionResultView = transactionResult.transactionResultView;
         if(result.equals(SUCCESS)){
-            transactionResultView.setText("TRANSACTION SUCCESSFUL");
+            transactionResultView.setText("TRANSACTION SUCCESSFULL");
         } else{
             transactionResultView.setText("TRANSACTION FAILED");
         }

@@ -150,6 +150,7 @@ public class PaymentActivity extends AppCompatActivity {
         } else{
             customerSelectionScreen.setVisibility(View.GONE);
             amountScreen.setVisibility(View.VISIBLE);
+            receiverNameAmountScreen.setText(getReceiverName());
             proceedToPaymentConfirmation();
         }
     }
@@ -189,7 +190,10 @@ public class PaymentActivity extends AppCompatActivity {
         if(pay) {
             returnButton.setOnClickListener(view -> customerSelection(false, null));
         } else {
-            returnButton.setOnClickListener(view -> proceedToPaymentConfirmation());
+            returnButton.setOnClickListener(view -> {
+                bufferAmount = amount;
+                proceedToPaymentConfirmation();
+            });
         }
     }
     private void setAmountButtons(){

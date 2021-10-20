@@ -236,7 +236,7 @@
                     android:background="@drawable/bg_pay_btn"
                     android:elevation="100dp"
                     android:fontFamily="monospace"
-                    android:text="Re-Pay"
+                    android:text="PayBack"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/base_theme_2"

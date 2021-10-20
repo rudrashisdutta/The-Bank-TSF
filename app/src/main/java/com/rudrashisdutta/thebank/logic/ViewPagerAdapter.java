@@ -1,6 +1,5 @@
 package com.rudrashisdutta.thebank.logic;
 
-import android.content.Context;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
